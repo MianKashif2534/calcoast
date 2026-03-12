@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import heroBg from "../assets/HeroBg.png";
-import heroRightImage from "../assets/heroRightImage.png";
+import heroBg from "@/app/assets/HeroBg.png";
+import heroRightImage from "@/app/assets/heroRightImage.png";
 
 const features = [
   "On Time Delivery",

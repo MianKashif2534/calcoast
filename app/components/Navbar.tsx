@@ -36,19 +36,19 @@ export function Navbar() {
             </svg>
           </button>
           <nav className="flex flex-col gap-2">
-            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="#" onClick={() => setMenuOpen(false)}>
+            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="/" onClick={() => setMenuOpen(false)}>
               Home
             </a>
-            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="#" onClick={() => setMenuOpen(false)}>
+            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="/about" onClick={() => setMenuOpen(false)}>
               About
             </a>
-            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="#" onClick={() => setMenuOpen(false)}>
+            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="/services" onClick={() => setMenuOpen(false)}>
               Services
             </a>
-            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="#" onClick={() => setMenuOpen(false)}>
+            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="/why-us" onClick={() => setMenuOpen(false)}>
               Why Us
             </a>
-            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="#" onClick={() => setMenuOpen(false)}>
+            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="/contact" onClick={() => setMenuOpen(false)}>
               Contact
             </a>
             <a
@@ -86,19 +86,19 @@ export function Navbar() {
         </a>
         <nav className="hidden flex-1 justify-center md:flex">
           <div className="flex items-center gap-1 rounded-full bg-[#0055FF] p-1 shadow-lg shadow-blue-500/30">
-            <a className="rounded-full bg-white/10 px-5 py-2 text-sm font-medium text-white hover:bg-white/20" href="#">
+            <a className="rounded-full bg-white/10 px-5 py-2 text-sm font-medium text-white hover:bg-white/20" href="/">
               Home
             </a>
-            <a className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10" href="#">
+            <a className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10" href="/about">
               About
             </a>
-            <a className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10" href="#">
+            <a className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10" href="/services">
               Services
             </a>
-            <a className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10" href="#">
+            <a className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10" href="/why-us">
               Why Us
             </a>
-            <a className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10" href="#">
+            <a className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10" href="/contact">
               Contact
             </a>
           </div>
