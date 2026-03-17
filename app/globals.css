@@ -4,5 +4,21 @@
   --color-nav-primary: #0055FF;
   --color-nav-cta: #3474F4;
   --color-nav-cta-hover: #285ee0;
+  --color-about-cal: #3474F4;
+  --color-freight: #0055FF;
+  --color-bg-about: #FFFFFF;
+  --color-about: #000000;
+  --color-haul: #3474F4;
 }
 
+@layer components {
+
+  .tag {
+    @apply bg-[#1A2BFF] text-white text-xs px-3 py-1 rounded-md;
+  }
+
+  .small-tag {
+    @apply border border-white/30 text-white/80 text-xs px-3 py-1 rounded-full;
+  }
+
+}
