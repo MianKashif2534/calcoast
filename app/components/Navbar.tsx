@@ -31,24 +31,53 @@ export function Navbar() {
             className="absolute right-4 top-2 flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-gray-900 transition-colors hover:bg-gray-100 md:hidden"
             aria-label="Close menu"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
           </button>
           <nav className="flex flex-col gap-2">
-            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="/" onClick={() => setMenuOpen(false)}>
+            <a
+              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
+              href="/"
+              onClick={() => setMenuOpen(false)}
+            >
               Home
             </a>
-            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="/about" onClick={() => setMenuOpen(false)}>
+            <a
+              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
+              href="/about"
+              onClick={() => setMenuOpen(false)}
+            >
               About
             </a>
-            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="/services" onClick={() => setMenuOpen(false)}>
+            <a
+              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
+              href="/services"
+              onClick={() => setMenuOpen(false)}
+            >
               Services
             </a>
-            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="/why-us" onClick={() => setMenuOpen(false)}>
+            <a
+              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
+              href="/why-us"
+              onClick={() => setMenuOpen(false)}
+            >
               Why Us
             </a>
-            <a className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white" href="/contact" onClick={() => setMenuOpen(false)}>
+            <a
+              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
+              href="/contact"
+              onClick={() => setMenuOpen(false)}
+            >
               Contact
             </a>
             <a
@@ -86,19 +115,34 @@ export function Navbar() {
         </a>
         <nav className="hidden flex-1 justify-center md:flex">
           <div className="flex items-center gap-1 rounded-full bg-[#0055FF] p-1 shadow-lg shadow-blue-500/30">
-            <a className="rounded-full bg-white/10 px-5 py-2 text-sm font-medium text-white hover:bg-white/20" href="/">
+            <a
+              className="rounded-full bg-white/10 px-5 py-2 text-sm font-medium text-white hover:bg-white/20"
+              href="/"
+            >
               Home
             </a>
-            <a className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10" href="/about">
+            <a
+              className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10"
+              href="/about"
+            >
               About
             </a>
-            <a className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10" href="/services">
+            <a
+              className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10"
+              href="/services"
+            >
               Services
             </a>
-            <a className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10" href="/why-us">
+            <a
+              className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10"
+              href="/why-us"
+            >
               Why Us
             </a>
-            <a className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10" href="/contact">
+            <a
+              className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10"
+              href="/contact"
+            >
               Contact
             </a>
           </div>
@@ -117,9 +161,20 @@ export function Navbar() {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
           >
-            <span className="sr-only">{menuOpen ? "Close menu" : "Open main menu"}</span>
+            <span className="sr-only">
+              {menuOpen ? "Close menu" : "Open main menu"}
+            </span>
             {menuOpen ? (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M18 6L6 18M6 6l12 12" />
               </svg>
             ) : (
