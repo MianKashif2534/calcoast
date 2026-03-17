@@ -84,7 +84,7 @@ export function QuoteSection() {
             <div className="md:col-span-2">
               <label className="text-sm font-medium">Additional Details</label>
               <textarea
-                rows="4"
+                rows={4}
                 placeholder="Tell us about your shipment..."
                 className="mt-1 w-full border border-blue-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               ></textarea>
