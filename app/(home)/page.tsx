@@ -3,6 +3,8 @@ import { About } from "./components/About";
 import { FreightServices } from "./components/FreightServices";
 import { StatsSection } from "./components/StatsSection";
 import { ReviewsSection } from "./components/ReviewsSection";
+import { CoverageSection } from "./components/CoverageSection";
+import { QuoteSection } from "./components/QuoteSection";
 
 export default function HomePage() {
   return (
@@ -12,6 +14,8 @@ export default function HomePage() {
       <FreightServices />
       <StatsSection />
       <ReviewsSection />
+      <CoverageSection />
+      <QuoteSection />
     </div>
   );
 }
