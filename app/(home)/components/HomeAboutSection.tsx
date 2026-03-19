@@ -3,9 +3,9 @@ import Image from "next/image";
 import frame779 from "@/app/assets/frame779.png";
 import frame781 from "@/app/assets/frame781.png";
 
-export function About() {
+export default function HomeAboutSection() {
   return (
-    <section className="bg-white from-slate-700 to-slate-500 py-20">
+    <section className="bg-white from-slate-700 to-slate-500 py-15">
       <div className="max-w-[1260px] min-h-[533px] mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
         <div className="relative">
           <Image
