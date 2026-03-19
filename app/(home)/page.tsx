@@ -5,6 +5,7 @@ import { StatsSection } from "./components/StatsSection";
 import { ReviewsSection } from "./components/ReviewsSection";
 import { CoverageSection } from "./components/CoverageSection";
 import { QuoteSection } from "./components/QuoteSection";
+import { ContactSection } from "./components/ContactSection";
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
       <ReviewsSection />
       <CoverageSection />
       <QuoteSection />
+      <ContactSection />
     </div>
   );
 }
