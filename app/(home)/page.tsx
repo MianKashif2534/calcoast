@@ -4,8 +4,9 @@ import { FreightServices } from "./components/FreightServices";
 import { StatsSection } from "./components/StatsSection";
 import { ReviewsSection } from "./components/ReviewsSection";
 import { CoverageSection } from "./components/CoverageSection";
-import { QuoteSection } from "./components/QuoteSection";
-import { ContactSection } from "./components/ContactSection";
+
+import { QuoteFormSection } from "../contact/components/QuoteFormSection";
+import { ContactUsSection } from "../contact/components/ContactUsSection";
 
 export default function HomePage() {
   return (
@@ -16,8 +17,9 @@ export default function HomePage() {
       <StatsSection />
       <ReviewsSection />
       <CoverageSection />
-      <QuoteSection />
-      <ContactSection />
+
+      <QuoteFormSection />
+      <ContactUsSection />
     </div>
   );
 }
