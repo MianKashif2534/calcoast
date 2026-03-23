@@ -157,13 +157,14 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className="inline-flex flex-col items-center justify-center gap-1 rounded-full border border-gray-300 p-2 text-gray-900 md:hidden"
+            className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-gray-300 bg-white text-gray-900 md:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
           >
             <span className="sr-only">
               {menuOpen ? "Close menu" : "Open main menu"}
             </span>
+
             {menuOpen ? (
               <svg
                 width="20"
@@ -178,11 +179,11 @@ export function Navbar() {
                 <path d="M18 6L6 18M6 6l12 12" />
               </svg>
             ) : (
-              <>
-                <span className="block h-0.5 w-5 bg-gray-900"></span>
-                <span className="block h-0.5 w-5 bg-gray-900"></span>
-                <span className="block h-0.5 w-5 bg-gray-900"></span>
-              </>
+              <div className="flex flex-col gap-[3px]">
+                <span className="block h-[2px] w-5 bg-gray-900 rounded"></span>
+                <span className="block h-[2px] w-5 bg-gray-900 rounded"></span>
+                <span className="block h-[2px] w-5 bg-gray-900 rounded"></span>
+              </div>
             )}
           </button>
         </div>

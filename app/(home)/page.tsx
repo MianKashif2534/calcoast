@@ -1,21 +1,25 @@
 import { Hero } from "./components/Hero";
-import { About } from "./components/About";
+import HomeAboutSection from "./components/HomeAboutSection";
 import { FreightServices } from "./components/FreightServices";
 import { StatsSection } from "./components/StatsSection";
 import { ReviewsSection } from "./components/ReviewsSection";
 import { CoverageSection } from "./components/CoverageSection";
-import { QuoteSection } from "./components/QuoteSection";
+
+import { QuoteFormSection } from "../contact/components/QuoteFormSection";
+import { ContactUsSection } from "../contact/components/ContactUsSection";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white text-black">
       <Hero />
-      <About />
+      <HomeAboutSection />
       <FreightServices />
       <StatsSection />
       <ReviewsSection />
       <CoverageSection />
-      <QuoteSection />
+
+      <QuoteFormSection />
+      <ContactUsSection />
     </div>
   );
 }
