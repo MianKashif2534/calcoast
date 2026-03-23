@@ -1,4 +1,7 @@
 import { PageHero } from "@/app/components/PageHero";
+import { WhyUsCtaSection } from "./WhyUsCtaSection";
+import { WhyUsFleetSection } from "./WhyUsFleetSection";
+import { WhyUsStrengthsSection } from "./WhyUsStrengthsSection";
 
 export function WhyUsPage() {
   return (
@@ -8,9 +11,9 @@ export function WhyUsPage() {
         title="Why Choose Cal Coast?"
         description="Discover what sets us apart from the competition and why brokers trust us with their freight."
       />
-      <main className="mx-auto max-w-7xl px-4 py-16">
-        {/* Why Us content below */}
-      </main>
+      <WhyUsFleetSection />
+      <WhyUsStrengthsSection />
+      <WhyUsCtaSection />
     </div>
   );
 }
