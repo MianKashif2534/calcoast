@@ -3,10 +3,20 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 import logo from "../assets/logo.png";
 
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Why Us", href: "/why-us" },
+  { label: "Contact", href: "/contact" },
+];
+
 export function Navbar() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -115,36 +125,22 @@ export function Navbar() {
         </a>
         <nav className="hidden flex-1 justify-center md:flex">
           <div className="flex items-center gap-1 rounded-full bg-[#0055FF] p-1 shadow-lg shadow-blue-500/30">
-            <a
-              className="rounded-full bg-white/10 px-5 py-2 text-sm font-medium text-white hover:bg-white/20"
-              href="/"
-            >
-              Home
-            </a>
-            <a
-              className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10"
-              href="/about"
-            >
-              About
-            </a>
-            <a
-              className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10"
-              href="/services"
-            >
-              Services
-            </a>
-            <a
-              className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10"
-              href="/why-us"
-            >
-              Why Us
-            </a>
-            <a
-              className="rounded-full px-5 py-2 text-sm font-medium text-white hover:bg-white/10"
-              href="/contact"
-            >
-              Contact
-            </a>
+            {navLinks.map(({ label, href }) => {
+              const isActive = pathname === href;
+              return (
+                <a
+                  key={href}
+                  className={`rounded-full px-5 py-2 text-sm font-medium transition-colors ${
+                    isActive
+                      ? "bg-white/80 text-[#0055FF] shadow-lg shadow-white/30"
+                      : "text-white hover:bg-white/10"
+                  }`}
+                  href={href}
+                >
+                  {label}
+                </a>
+              );
+            })}
           </div>
         </nav>
         <div className="flex shrink-0 items-center justify-end gap-3">
