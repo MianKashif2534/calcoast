@@ -46,10 +46,9 @@ export function Footer() {
   return (
     <footer className="bg-[#020840] text-white">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {/* Column 1: Company Info */}
-          <div className="space-y-4">
-            <Link href="/" className="inline-block">
+        <div className="grid gap-10 text-center md:grid-cols-2 md:text-left lg:grid-cols-3">
+          <div className="flex flex-col items-center space-y-4 md:items-start">
+            <Link href="/" className="inline-flex justify-center md:justify-start">
               <div className="flex h-14 w-48 items-center justify-center rounded-full bg-white px-4 py-2">
                 <Image
                   src={logo}
@@ -68,10 +67,9 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div className="space-y-4">
+          <div className="flex flex-col items-center space-y-4 md:items-start">
             <h3 className="text-base font-semibold text-white">Quick Links</h3>
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col items-center gap-2 md:items-start">
               {quickLinks.map((link) => (
                 <Link
                   key={link.label}
@@ -84,22 +82,21 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Column 3: Contact Info */}
-          <div className="space-y-4">
+          <div className="flex flex-col items-center space-y-4 md:items-start">
             <h3 className="text-base font-semibold text-white">Contact Info</h3>
-            <div className="flex flex-col gap-3">
+            <div className="flex w-full flex-col gap-4 md:gap-3">
               {contactItems.map((item) => (
                 <a
                   key={item.text}
                   href={item.href}
                   target={item.href.startsWith("http") ? "_blank" : undefined}
                   rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="flex items-start gap-3 text-sm text-white/95 transition-colors hover:text-white"
+                  className="flex flex-col items-center gap-2 text-sm text-white/95 transition-colors hover:text-white md:flex-row md:items-start md:gap-3 md:text-left"
                 >
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[#020840]">
                     {item.icon}
                   </span>
-                  <span className="pt-0.5">{item.text}</span>
+                  <span className="max-w-xs md:pt-0.5">{item.text}</span>
                 </a>
               ))}
             </div>
@@ -107,7 +104,6 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Copyright Bar */}
       <div className="border-t border-white/20">
         <div className="mx-auto max-w-6xl px-4 py-5 text-center text-sm text-white/80 sm:px-6 lg:px-8">
           © 2026 Cal Coast Logistics. All Rights Reserved.
