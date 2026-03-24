@@ -1,5 +1,13 @@
-import { ServicesPage } from "./components/ServicesPage";
+import { ServicesHero } from "./components/ServicesHero";
+import { ServicesSection } from "./components/ServicesSection";
+import { HowItWorks } from "./components/HowItWorks";
 
 export default function Services() {
-  return <ServicesPage />;
+  return (
+    <>
+      <ServicesHero />
+      <ServicesSection />
+      <HowItWorks />
+    </>
+  );
 }
