@@ -1,82 +1,149 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 import mainImage from "@/app/assets/frame779.png";
 import overlayImage from "@/app/assets/frame781.png";
 import mobileImage from "@/app/assets/frame782.png";
 
 export default function HomeAboutSection() {
+  const fadeUp = {
+    hidden: { opacity: 0, y: 50 },
+    show: { opacity: 1, y: 0 },
+  };
+
   return (
     <section className="bg-white py-10">
-      <div className="max-w-[1260px] mx-auto px-4 lg:px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="mx-auto max-w-6xl px-6 grid lg:grid-cols-2 gap-10 items-center">
         {/* Images */}
-        <div>
-          {/* Mobile layout */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          transition={{ staggerChildren: 0.2 }}
+        >
+          {/* Mobile */}
           <div className="lg:hidden space-y-4">
-            <div className="bg-black text-white px-4 py-3 rounded-lg">
+            <motion.div
+              variants={fadeUp}
+              className="bg-black text-white px-4 py-3 rounded-lg"
+            >
               <p className="text-sm font-semibold">
                 35+ Vehicles <br /> Owned Fleet
               </p>
-            </div>
+            </motion.div>
 
-            <Image
-              src={mobileImage}
-              alt="Truck"
-              className="w-full rounded-xl border-4 "
-            />
+            <motion.div variants={fadeUp}>
+              <Image
+                src={mobileImage}
+                alt="Truck"
+                className="w-full rounded-xl border-4 transition duration-700 hover:scale-105"
+              />
+            </motion.div>
 
-            <div className="bg-indigo-700 text-white px-4 py-3 rounded-lg">
+            <motion.div
+              variants={fadeUp}
+              className="bg-indigo-700 text-white px-4 py-3 rounded-lg"
+            >
               <p className="text-sm font-semibold">
                 Since 2015 <br /> FMCSA Authorized
               </p>
-            </div>
+            </motion.div>
 
-            <Image src={mainImage} alt="Fleet" className="w-full rounded-xl" />
+            <motion.div variants={fadeUp}>
+              <Image
+                src={mainImage}
+                alt="Fleet"
+                className="w-full rounded-xl transition duration-700 hover:scale-105"
+              />
+            </motion.div>
           </div>
 
-          {/* Desktop layout */}
+          {/* Desktop */}
           <div className="hidden lg:block relative">
-            <Image
-              src={mainImage}
-              alt="Fleet"
-              width={640}
-              height={483}
-              className="rounded-xl"
-            />
-
-            <div className="absolute top-16 left-16">
+            {/* Main Image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7 }}
+              viewport={{ once: true }}
+            >
               <Image
-                src={overlayImage}
-                alt="Truck"
+                src={mainImage}
+                alt="Fleet"
                 width={640}
                 height={483}
-                className="rounded-xl shadow-xl border-[6px]"
+                className="rounded-xl"
               />
-            </div>
+            </motion.div>
+
+            {/* Overlay Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 80, y: 40 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="absolute top-16 left-16"
+            >
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+              >
+                <Image
+                  src={overlayImage}
+                  alt="Truck"
+                  width={640}
+                  height={483}
+                  className="rounded-xl shadow-xl border-[6px]"
+                />
+              </motion.div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Content */}
-        <div className="text-center lg:text-left space-y-4">
-          <p className="text-about-cal text-2xl font-semibold">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          transition={{ staggerChildren: 0.2 }}
+          className="text-center lg:text-left space-y-4"
+        >
+          <motion.p
+            variants={fadeUp}
+            className="text-about-cal text-2xl font-semibold"
+          >
             About Cal Coast Logistics
-          </p>
+          </motion.p>
 
-          <h2 className="text-4xl font-bold leading-tight">
+          <motion.h2
+            variants={fadeUp}
+            className="text-4xl font-bold leading-tight"
+          >
             Fresno's Trusted <br />
             <span className="text-freight">Freight Partner</span>
-          </h2>
+          </motion.h2>
 
-          <p className="text-text-about text-lg leading-relaxed">
+          <motion.p
+            variants={fadeUp}
+            className="text-text-about text-lg leading-relaxed"
+          >
             Cal Coast Logistics is an active interstate freight carrier based
             out of Fresno, California. We specialize in general freight, fresh
             produce, and full truckload transport with a proven track record of
-            reliability and on-time performance.
-          </p>
+            reliability and on time performance.
+          </motion.p>
 
-          <button className="bg-gradient-to-r from-blue-600 to-blue-400 text-white px-6 lg:px-20 py-2 rounded-lg font-semibold hover:opacity-90 transition">
+          <motion.button
+            variants={fadeUp}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-gradient-to-r from-blue-600 to-blue-400 text-white px-6 lg:px-20 py-2 rounded-lg font-semibold"
+          >
             Explore Our Services
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
     </section>
   );
