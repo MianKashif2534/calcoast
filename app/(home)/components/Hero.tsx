@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 import heroBg from "@/app/assets/HeroBg.png";
 import heroRightImage from "@/app/assets/heroRightImage.png";
@@ -9,133 +10,151 @@ const features = ["On Time Delivery", "35+ Assets", "Interstate Authority"];
 
 function CheckIcon() {
   return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      className="shrink-0"
-    >
-      <rect width="20" height="20" rx="4" fill="#3474F4" />
-      <path
-        d="M5 10L8.5 13.5L15 7"
-        stroke="white"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <div className="flex h-5 w-5 items-center justify-center rounded bg-[#3474F4] text-white text-xs">
+      ✓
+    </div>
   );
 }
 
 function PhoneIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="shrink-0"
-    >
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-    </svg>
-  );
+  return <span>📞</span>;
 }
 
 export function Hero() {
+  // Stagger container
+  const container = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  // Common fade up
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    show: { opacity: 1, y: 0 },
+  };
+
   return (
     <section className="relative z-0 min-h-[90vh] overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
-        <Image
-          src={heroBg}
-          alt=""
-          fill
-          className="object-cover object-center"
-          priority
-          sizes="100vw"
-        />
+        <motion.div
+          initial={{ scale: 1.2 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 6, ease: "easeOut" }}
+          className="h-full w-full"
+        >
+          <Image src={heroBg} alt="" fill className="object-cover" priority />
+        </motion.div>
+
         <div className="absolute inset-0 bg-gradient-to-b from-blue-950/80 via-slate-900/70 to-black/90" />
       </div>
 
       {/* Content */}
-      <div className="relative mx-auto flex min-h-[90vh] max-w-7xl flex-col items-center gap-8 px-4 py-16 lg:flex-row lg:items-center lg:gap-12 lg:px-8 lg:py-24">
+      <div className="relative mx-auto flex min-h-[90vh] max-w-7xl flex-col items-center gap-8 px-4 py-16 lg:flex-row lg:gap-12 lg:px-8 lg:py-24">
         {/* LEFT */}
-        <div className="flex flex-1 flex-col items-center text-center gap-6 lg:items-start lg:text-left lg:max-w-xl">
-          <p className="text-sm sm:text-base font-medium text-[#3474F4] tracking-wide">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="flex flex-1 flex-col items-center text-center gap-6 lg:items-start lg:text-left lg:max-w-xl"
+        >
+          <motion.p variants={fadeUp} className="text-sm text-[#3474F4]">
             Fresno, California Since 2015
-          </p>
+          </motion.p>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[3.25rem] font-bold leading-tight text-white">
+          <motion.h1
+            variants={fadeUp}
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight"
+          >
             Reliable Freight Solutions Across California & Beyond
-          </h1>
+          </motion.h1>
 
-          <p className="text-sm sm:text-base text-gray-300 leading-relaxed max-w-md lg:max-w-none">
+          <motion.p
+            variants={fadeUp}
+            className="text-sm text-gray-300 max-w-md"
+          >
             Cal Coast Logistics delivers dependable cargo and freight
             transportation. Full Truckload and Fresh Produce services with on
             time performance you can trust.
-          </p>
+          </motion.p>
 
           {/* Features */}
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4 sm:gap-6">
+          <motion.div
+            variants={container}
+            className="flex flex-wrap justify-center lg:justify-start gap-4"
+          >
             {features.map((feature) => (
-              <div key={feature} className="flex items-center gap-2">
+              <motion.div
+                key={feature}
+                variants={fadeUp}
+                className="flex items-center gap-2"
+              >
                 <CheckIcon />
-                <span className="text-sm font-medium text-white">
-                  {feature}
-                </span>
-              </div>
+                <span className="text-sm text-white">{feature}</span>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Buttons */}
-          <div className="flex flex-col w-full sm:w-auto gap-3 sm:flex-row sm:gap-4">
-            <a
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-col sm:flex-row gap-3"
+          >
+            <motion.a
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
               href="#"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#3474F4] px-6 py-3 text-sm sm:text-base font-semibold text-white transition hover:bg-[#285ee0]"
+              className="bg-[#3474F4] px-6 py-3 rounded-lg text-white font-semibold"
             >
               Request a Quote →
-            </a>
+            </motion.a>
 
-            <a
+            <motion.a
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
               href="tel:+15594816441"
-              className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white px-6 py-3 text-sm sm:text-base font-semibold text-white transition hover:bg-white/10"
+              className="border-2 border-white px-6 py-3 rounded-lg text-white font-semibold"
             >
-              <PhoneIcon />
-              (559) 481 6441
-            </a>
-          </div>
-        </div>
+              <PhoneIcon /> Call Now
+            </motion.a>
+          </motion.div>
+        </motion.div>
 
         {/* RIGHT IMAGE */}
-        <div className="flex w-full flex-1 justify-center lg:max-w-lg">
-          <div className="relative w-full max-w-md overflow-hidden rounded-2xl shadow-2xl">
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex w-full flex-1 justify-center lg:max-w-lg"
+        >
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 4, repeat: Infinity }}
+            className="relative w-full max-w-md overflow-hidden rounded-2xl shadow-2xl"
+          >
             <Image
               src={heroRightImage}
-              alt="Cal Coast Logistics truck"
+              alt="truck"
               width={600}
               height={400}
-              className="aspect-[3/2] w-full object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              className="w-full object-cover"
             />
 
-            {/* Left Badge */}
-            <div className="absolute bottom-4 left-4 rounded-lg bg-black/70 px-3 py-2 backdrop-blur-sm">
-              <p className="text-xs text-white">FMCSA Active</p>
-              <p className="text-xs text-white">Since Nov 2015</p>
+            {/* Badge */}
+            <div className="absolute bottom-4 left-4 bg-black/70 px-3 py-2 rounded-lg text-white text-xs backdrop-blur">
+              FMCSA Active
             </div>
 
             {/* Rating */}
-            <div className="absolute bottom-4 right-4 flex items-center gap-1.5 rounded-full bg-black/70 px-3 py-2 backdrop-blur-sm">
-              <span className="text-yellow-400">★</span>
-              <span className="text-sm font-semibold text-white">5.0</span>
+            <div className="absolute bottom-4 right-4 bg-black/70 px-3 py-2 rounded-full text-white text-sm backdrop-blur">
+              ★ 5.0
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
