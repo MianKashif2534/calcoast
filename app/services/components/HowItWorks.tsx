@@ -26,32 +26,33 @@ export function HowItWorks() {
     },
   ];
 
-  // Parent animation (stagger)
   const container = {
     hidden: {},
     show: {
-      transition: {
-        staggerChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.2 },
     },
   };
 
-  // Card animation
   const card = {
-    hidden: { opacity: 0, y: 50 },
-    show: { opacity: 1, y: 0 },
+    hidden: { opacity: 0, y: 60, rotateX: 10 },
+    show: { opacity: 1, y: 0, rotateX: 0 },
   };
 
   return (
     <section className="bg-[#F3F6FB] py-16">
       <div className="mx-auto max-w-7xl px-6">
         {/* Heading */}
-        <div className="text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
           <p className="text-sm font-medium text-blue-500">Simple Process</p>
           <h2 className="mt-2 text-3xl font-semibold text-black">
             How It Works
           </h2>
-        </div>
+        </motion.div>
 
         {/* Cards */}
         <motion.div
@@ -68,26 +69,44 @@ export function HowItWorks() {
             <motion.div
               key={index}
               variants={card}
-              transition={{ duration: 0.5 }}
-              className="w-full h-[320px]
+              transition={{ duration: 0.6 }}
+              whileHover={{
+                scale: 1.07,
+                rotateY: 5,
+              }}
+              className="group relative w-full h-[320px]
                          bg-[#0C1F8F] text-white 
                          rounded-[16px] 
                          flex flex-col items-center justify-center 
                          px-5 text-center
-                         hover:scale-105 transition"
+                         overflow-hidden"
             >
+              {/* Glow Background */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-blue-500/20 to-transparent" />
+
               {/* Number */}
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-blue-400 font-semibold">
+              <motion.div
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-blue-400 font-semibold z-10"
+              >
                 {item.number}
-              </div>
+              </motion.div>
 
               {/* Title */}
-              <h3 className="text-base font-semibold">{item.title}</h3>
+              <h3 className="text-base font-semibold z-10">{item.title}</h3>
 
               {/* Desc */}
-              <p className="mt-2 text-sm text-white/80 leading-relaxed">
+              <p className="mt-2 text-sm text-white/80 leading-relaxed z-10">
                 {item.desc}
               </p>
+
+              {/* Bottom line animation */}
+              <motion.div
+                initial={{ width: 0 }}
+                whileHover={{ width: "60%" }}
+                className="absolute bottom-4 h-[2px] bg-blue-400"
+              />
             </motion.div>
           ))}
         </motion.div>
