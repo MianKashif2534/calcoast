@@ -91,7 +91,7 @@ export function Navbar() {
               Contact
             </a>
             <a
-              href="#"
+              href="/contact"
               className="mt-1 rounded-full bg-[#3474F4] px-4 py-2 text-sm font-semibold text-white"
               onClick={() => setMenuOpen(false)}
             >
@@ -145,7 +145,7 @@ export function Navbar() {
         </nav>
         <div className="flex shrink-0 items-center justify-end gap-3">
           <a
-            href="#"
+            href="/contact"
             className="hidden rounded-full bg-[#3474F4] px-6 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/40 hover:bg-[#285ee0] md:inline-flex"
           >
             Request a Quote →
