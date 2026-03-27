@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import InteractiveButton from "@/app/Animations/InteractiveButton";
 
 import logo from "../assets/logo.png";
 
@@ -17,6 +18,7 @@ const navLinks = [
 
 export function Navbar() {
   const pathname = usePathname();
+  const router = useRouter(); // ✅ Fixed
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -31,8 +33,6 @@ export function Navbar() {
         className={`fixed right-0 top-0 z-[9999] mt-4 h-auto w-[85%] max-w-sm rounded-2xl bg-white shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] md:hidden ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         } ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
-        aria-hidden={!menuOpen}
-        style={{ backgroundColor: "#ffffff" }}
       >
         <div className="relative flex flex-col gap-2 px-6 py-6 pt-14">
           <button
@@ -54,58 +54,40 @@ export function Navbar() {
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
           </button>
+
+          {/* Nav links (normal) */}
           <nav className="flex flex-col gap-2">
-            <a
-              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
-              href="/"
-              onClick={() => setMenuOpen(false)}
-            >
-              Home
-            </a>
-            <a
-              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
-              href="/about"
-              onClick={() => setMenuOpen(false)}
-            >
-              About
-            </a>
-            <a
-              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
-              href="/services"
-              onClick={() => setMenuOpen(false)}
-            >
-              Services
-            </a>
-            <a
-              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
-              href="/why-us"
-              onClick={() => setMenuOpen(false)}
-            >
-              Why Us
-            </a>
-            <a
-              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
-              href="/contact"
-              onClick={() => setMenuOpen(false)}
-            >
-              Contact
-            </a>
-            <a
-              href="/contact"
-              className="mt-1 rounded-full bg-[#3474F4] px-4 py-2 text-sm font-semibold text-white"
-              onClick={() => setMenuOpen(false)}
+            {navLinks.map(({ label, href }) => (
+              <a
+                key={href}
+                className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
+                href={href}
+                onClick={() => setMenuOpen(false)}
+              >
+                {label}
+              </a>
+            ))}
+
+            {/* Only this button gets animation */}
+            <InteractiveButton
+              className="mt-1 w-full rounded-full bg-[#3474F4] px-4 py-2 text-sm font-semibold text-white"
+              onClick={() => {
+                router.push("/contact");
+                setMenuOpen(false);
+              }}
             >
               Request a Quote →
-            </a>
+            </InteractiveButton>
           </nav>
         </div>
       </div>
+
+      {/* Overlay */}
       <div
         className={`fixed inset-0 z-[9998] bg-black/30 backdrop-blur-md transition-opacity duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] md:hidden ${
           menuOpen ? "opacity-100" : "opacity-0"
         } ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
         onClick={() => setMenuOpen(false)}
-        aria-hidden={!menuOpen}
       />
     </>
   );
@@ -123,6 +105,8 @@ export function Navbar() {
             priority
           />
         </a>
+
+        {/* Desktop nav links */}
         <nav className="hidden flex-1 justify-center md:flex">
           <div className="flex items-center gap-1 rounded-full bg-[#0055FF] p-1 shadow-lg shadow-blue-500/30">
             {navLinks.map(({ label, href }) => {
@@ -143,13 +127,17 @@ export function Navbar() {
             })}
           </div>
         </nav>
+
+        {/* Desktop Request a Quote */}
         <div className="flex shrink-0 items-center justify-end gap-3">
-          <a
-            href="/contact"
-            className="hidden rounded-full bg-[#3474F4] px-6 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/40 hover:bg-[#285ee0] md:inline-flex"
+          <InteractiveButton
+            className="hidden md:inline-flex rounded-full bg-[#3474F4] px-6 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/40 hover:bg-[#285ee0]"
+            onClick={() => router.push("/contact")}
           >
             Request a Quote →
-          </a>
+          </InteractiveButton>
+
+          {/* Mobile toggle */}
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
@@ -160,7 +148,6 @@ export function Navbar() {
             <span className="sr-only">
               {menuOpen ? "Close menu" : "Open main menu"}
             </span>
-
             {menuOpen ? (
               <svg
                 width="20"
@@ -184,6 +171,8 @@ export function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* Mobile menu portal */}
       {mounted && createPortal(mobileMenu, document.body)}
     </header>
   );
