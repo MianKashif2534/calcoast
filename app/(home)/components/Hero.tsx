@@ -38,7 +38,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative z-0 min-h-[90vh] overflow-hidden">
+    <section className="relative z-0 min-h-screen overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <motion.div
@@ -54,7 +54,7 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative mx-auto flex min-h-[90vh] max-w-7xl flex-col items-center gap-8 px-4 py-16 lg:flex-row lg:gap-12 lg:px-8 lg:py-24">
+      <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col items-center gap-8 px-4 py-16 lg:flex-row lg:gap-12 lg:px-8 lg:py-24">
         {/* LEFT */}
         <motion.div
           variants={container}

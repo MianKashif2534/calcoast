@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: var(--font-futura-heavy), ui-sans-serif, system-ui, sans-serif;
   --color-nav-primary: #0055FF;
   --color-nav-cta: #3474F4;
   --color-nav-cta-hover: #285ee0;

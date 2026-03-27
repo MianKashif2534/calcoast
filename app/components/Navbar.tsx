@@ -16,13 +16,29 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
+const navLinksLeft = navLinks.slice(0, 3);
+const navLinksRight = navLinks.slice(3, 6);
+
+function linkActive(pathname: string, href: string) {
+  if (href === "/#reviews") return false;
+  return pathname === href;
+}
+
 export function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const mobileMenu = (
@@ -118,81 +134,118 @@ export function Navbar() {
     </>
   );
 
-  return (
-    <header className="relative z-[60] border-b border-gray-200 bg-white backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <a href="/" className="flex shrink-0 items-center">
-          <Image
-            src={logo}
-            alt="Calcoast Logistics"
-            height={40}
-            width={180}
-            className="h-10 w-auto"
-            priority
-          />
+  const renderNavLinks = (links: typeof navLinks) =>
+    links.map(({ label, href }) => {
+      const isActive = linkActive(pathname, href);
+      const linkClass = scrolled
+        ? isActive
+          ? "bg-[#0055FF]/12 text-[#0055FF] shadow-sm"
+          : "text-[#0055FF] hover:bg-[#0055FF]/10"
+        : isActive
+          ? "bg-white/80 text-[#0055FF] shadow-lg shadow-white/30"
+          : "text-white hover:bg-white/10";
+      return (
+        <a
+          key={href}
+          className={`rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 sm:px-5 ${linkClass}`}
+          href={href}
+        >
+          {label}
         </a>
-        <nav className="hidden flex-1 justify-center md:flex">
-          <div className="flex items-center gap-1 rounded-full bg-[#0055FF] p-1 shadow-lg shadow-blue-500/30">
-            {navLinks.map(({ label, href }) => {
-              const isActive =
-                href === "/#reviews"
-                  ? pathname === "/"
-                  : pathname === href;
-              return (
-                <a
-                  key={href}
-                  className={`rounded-full px-5 py-2 text-sm font-medium transition-colors ${
-                    isActive
-                      ? "bg-white/80 text-[#0055FF] shadow-lg shadow-white/30"
-                      : "text-white hover:bg-white/10"
-                  }`}
-                  href={href}
-                >
-                  {label}
-                </a>
-              );
-            })}
+      );
+    });
+
+  return (
+    <header
+      className={`fixed inset-x-0 z-[100] bg-transparent transition-[top] duration-[900ms] ease-[cubic-bezier(0.33,1,0.68,1)] ${
+        scrolled ? "top-0" : "top-6"
+      }`}
+    >
+      <div
+        className={`mx-auto w-full transition-[max-width,padding] duration-[900ms] ease-[cubic-bezier(0.33,1,0.68,1)] ${
+          scrolled
+            ? "max-w-full p-0"
+            : "max-w-6xl px-4 py-3 sm:px-6 lg:px-8"
+        }`}
+      >
+        {/* One continuous blue bar: left links | logo | right links */}
+        <nav
+          className={`hidden w-full items-center gap-1 transition-[border-radius,padding,background-color,box-shadow] duration-[900ms] ease-[cubic-bezier(0.33,1,0.68,1)] md:flex ${
+            scrolled
+              ? "rounded-none bg-white p-2 shadow-md shadow-black/10"
+              : "rounded-lg bg-[#0055FF] p-1 shadow-lg shadow-blue-500/30"
+          }`}
+          aria-label="Main"
+        >
+          <div className="flex min-h-10 flex-1 flex-wrap items-center justify-around gap-0">
+            {renderNavLinks(navLinksLeft)}
+          </div>
+          <a
+            href="/"
+            className="flex shrink-0 items-center px-3 sm:px-4"
+          >
+            <Image
+              src={logo}
+              alt="Calcoast Logistics"
+              height={40}
+              width={180}
+              className="h-10 w-auto"
+              priority
+            />
+          </a>  
+          <div className="flex min-h-10 flex-1 flex-wrap items-center justify-around gap-0">
+            {renderNavLinks(navLinksRight)}
           </div>
         </nav>
-        <div className="flex shrink-0 items-center justify-end gap-3">
-          <a
-            href="/contact"
-            className="hidden rounded-full bg-[#3474F4] px-6 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/40 hover:bg-[#285ee0] md:inline-flex"
-          >
-            Request a Quote →
-          </a>
-          <button
-            type="button"
-            onClick={() => setMenuOpen((prev) => !prev)}
-            className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-gray-300 bg-white text-gray-900 md:hidden"
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-          >
-            <span className="sr-only">
-              {menuOpen ? "Close menu" : "Open main menu"}
-            </span>
 
-            {menuOpen ? (
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
-            ) : (
-              <div className="flex flex-col gap-[3px]">
-                <span className="block h-[2px] w-5 bg-gray-900 rounded"></span>
-                <span className="block h-[2px] w-5 bg-gray-900 rounded"></span>
-                <span className="block h-[2px] w-5 bg-gray-900 rounded"></span>
-              </div>
-            )}
-          </button>
+        <div className="flex items-center justify-between gap-4 md:hidden">
+          <a href="/" className="flex shrink-0 items-center">
+            <Image
+              src={logo}
+              alt="Calcoast Logistics"
+              height={40}
+              width={180}
+              className="h-10 w-auto"
+              priority
+            />
+          </a>
+          <div className="flex shrink-0 items-center justify-end gap-3">
+            <a
+              href="/contact"
+              className="inline-flex rounded-full bg-[#3474F4] px-3 py-2 text-xs font-semibold text-white shadow-lg shadow-blue-500/40 hover:bg-[#285ee0] sm:px-4 sm:text-sm"
+            >
+              Quote →
+            </a>
+            <button
+              type="button"
+              onClick={() => setMenuOpen((prev) => !prev)}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-900"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+            >
+              <span className="sr-only">{menuOpen ? "Close menu" : "Open main menu"}</span>
+              {menuOpen ? (
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              ) : (
+                <div className="flex flex-col gap-[3px]">
+                  <span className="block h-0.5 w-5 rounded bg-gray-900" />
+                  <span className="block h-0.5 w-5 rounded bg-gray-900" />
+                  <span className="block h-0.5 w-5 rounded bg-gray-900" />
+                </div>
+              )}
+            </button>
+          </div>
         </div>
       </div>
       {mounted && createPortal(mobileMenu, document.body)}
