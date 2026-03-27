@@ -2,12 +2,16 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 import mainImage from "@/app/assets/frame779.png";
 import overlayImage from "@/app/assets/frame781.png";
 import mobileImage from "@/app/assets/frame782.png";
+import InteractiveButton from "@/app/Animations/InteractiveButton";
 
 export default function HomeAboutSection() {
+  const router = useRouter(); // ✅ use router
+
   const fadeUp = {
     hidden: { opacity: 0, y: 50 },
     show: { opacity: 1, y: 0 },
@@ -62,7 +66,6 @@ export default function HomeAboutSection() {
 
           {/* Desktop */}
           <div className="hidden lg:block relative">
-            {/* Main Image */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -78,7 +81,6 @@ export default function HomeAboutSection() {
               />
             </motion.div>
 
-            {/* Overlay Image */}
             <motion.div
               initial={{ opacity: 0, x: 80, y: 40 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -135,14 +137,15 @@ export default function HomeAboutSection() {
             reliability and on time performance.
           </motion.p>
 
-          <motion.button
-            variants={fadeUp}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-blue-600 to-blue-400 text-white px-6 lg:px-20 py-2 rounded-lg font-semibold"
-          >
-            Explore Our Services
-          </motion.button>
+          {/* Animated Button with navigation */}
+          <motion.div variants={fadeUp}>
+            <InteractiveButton
+              className="w-full lg:w-auto px-6 py-3"
+              onClick={() => router.push("/services")}
+            >
+              Explore Our Services
+            </InteractiveButton>
+          </motion.div>
         </motion.div>
       </div>
     </section>
