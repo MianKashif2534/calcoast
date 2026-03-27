@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import img1 from "@/app/assets/frame749.png";
 import img2 from "@/app/assets/service-produce1.png";
@@ -73,15 +74,18 @@ export function ServicesSection() {
               </p>
 
               <ul className="mt-4 space-y-2 text-sm">
-                <li>✓ Dry van and flatbed options available</li>
+                <li>✓ Full truckload capacity for long haul routes</li>
                 <li>✓ Direct point to point delivery</li>
                 <li>✓ Real time tracking and updates</li>
                 <li>✓ Flexible scheduling to meet your deadlines</li>
               </ul>
 
-              <button className="mt-5 w-fit rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium hover:bg-blue-700 transition">
+              <Link
+                href="/contact"
+                className="mt-5 inline-flex w-fit rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium transition hover:bg-blue-700"
+              >
                 Get a Quote →
-              </button>
+              </Link>
             </motion.div>
           </motion.div>
 
@@ -125,9 +129,12 @@ export function ServicesSection() {
                 <li>✓ Compliance with food safety standards</li>
               </ul>
 
-              <button className="mt-5 w-fit rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium hover:bg-blue-700 transition">
+              <Link
+                href="/contact"
+                className="mt-5 inline-flex w-fit rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium transition hover:bg-blue-700"
+              >
                 Get a Quote →
-              </button>
+              </Link>
             </motion.div>
           </motion.div>
 
@@ -165,9 +172,12 @@ export function ServicesSection() {
                 <li>✓ Ideal for high volume shipments</li>
               </ul>
 
-              <button className="mt-5 w-fit rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium hover:bg-blue-700 transition">
+              <Link
+                href="/contact"
+                className="mt-5 inline-flex w-fit rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium transition hover:bg-blue-700"
+              >
                 Get a Quote →
-              </button>
+              </Link>
             </motion.div>
 
             <Image

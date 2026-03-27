@@ -107,7 +107,7 @@ export function Hero() {
             <motion.a
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              href="#"
+              href="/contact"
               className="bg-[#3474F4] px-6 py-3 rounded-lg text-white font-semibold"
             >
               Request a Quote →

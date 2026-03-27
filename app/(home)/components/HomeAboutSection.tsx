@@ -1,11 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 import mainImage from "@/app/assets/frame779.png";
 import overlayImage from "@/app/assets/frame781.png";
 import mobileImage from "@/app/assets/frame782.png";
+
+const MotionLink = motion.create(Link);
 
 export default function HomeAboutSection() {
   const fadeUp = {
@@ -135,14 +138,15 @@ export default function HomeAboutSection() {
             reliability and on time performance.
           </motion.p>
 
-          <motion.button
+          <MotionLink
+            href="/services"
             variants={fadeUp}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-blue-600 to-blue-400 text-white px-6 lg:px-20 py-2 rounded-lg font-semibold"
+            className="inline-block bg-gradient-to-r from-blue-600 to-blue-400 px-6 py-2 font-semibold text-white lg:px-20 rounded-lg"
           >
             Explore Our Services
-          </motion.button>
+          </MotionLink>
         </motion.div>
       </div>
     </section>

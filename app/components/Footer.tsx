@@ -164,7 +164,7 @@ const quickLinks = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Why Us", href: "/why-us" },
-  { label: "Reviews", href: "#reviews" },
+  { label: "Reviews", href: "/#reviews" },
   { label: "Contact", href: "/contact" },
 ];
 

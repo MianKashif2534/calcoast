@@ -1,11 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 import serviceproduce1 from "@/app/assets/service-produce1.png";
 import serviceproduce2 from "@/app/assets/service-produce2.png";
 import frame749 from "@/app/assets/frame749.png";
+
+const MotionLink = motion.create(Link);
 
 export function FreightServices() {
   return (
@@ -24,8 +27,8 @@ export function FreightServices() {
             Freight Services & Capabilities
           </h2>
           <p className="text-gray-600 text-sm">
-            AAuthorized for interstate property transport. Dry Van & Reefer
-            equipped fleet ready for your cargo.
+            Authorized for interstate property transport. Reefer equipped fleet
+            ready for your cargo.
           </p>
         </motion.div>
 
@@ -130,13 +133,14 @@ export function FreightServices() {
           viewport={{ once: true }}
           className="flex justify-center mt-8"
         >
-          <motion.button
+          <MotionLink
+            href="/contact"
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium"
+            className="inline-block rounded-md bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700"
           >
             Get a Freight Quote →
-          </motion.button>
+          </MotionLink>
         </motion.div>
       </div>
     </section>

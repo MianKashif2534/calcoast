@@ -12,6 +12,7 @@ const navLinks = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Why Us", href: "/why-us" },
+  { label: "Reviews", href: "/#reviews" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -85,6 +86,13 @@ export function Navbar() {
             </a>
             <a
               className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
+              href="/#reviews"
+              onClick={() => setMenuOpen(false)}
+            >
+              Reviews
+            </a>
+            <a
+              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
               href="/contact"
               onClick={() => setMenuOpen(false)}
             >
@@ -126,7 +134,10 @@ export function Navbar() {
         <nav className="hidden flex-1 justify-center md:flex">
           <div className="flex items-center gap-1 rounded-full bg-[#0055FF] p-1 shadow-lg shadow-blue-500/30">
             {navLinks.map(({ label, href }) => {
-              const isActive = pathname === href;
+              const isActive =
+                href === "/#reviews"
+                  ? pathname === "/"
+                  : pathname === href;
               return (
                 <a
                   key={href}
