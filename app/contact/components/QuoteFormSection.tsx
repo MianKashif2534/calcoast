@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, type Variants } from "framer-motion";
 import { useState } from "react";
 
 const freightTypes = [
@@ -11,115 +12,252 @@ const freightTypes = [
   "Other",
 ];
 
+const easeOut = [0.22, 1, 0.36, 1] as const;
+
+const viewport = { once: true, margin: "-60px" };
+
+const sectionBg = {
+  background:
+    "linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(52, 116, 244, 0.2) 100%), #f0f4f8",
+};
+
+const headerBlock: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.06 },
+  },
+};
+
+const headerEyebrow: Variants = {
+  hidden: { opacity: 0, y: -10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut },
+  },
+};
+
+const headerTitle: Variants = {
+  hidden: { opacity: 0, y: 18, rotateX: -6 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: { duration: 0.55, ease: easeOut },
+  },
+};
+
+const headerSub: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut },
+  },
+};
+
+const cardShell: Variants = {
+  hidden: { opacity: 0, y: 28, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.55, ease: easeOut },
+  },
+};
+
+const formRoot: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.09, delayChildren: 0.08 },
+  },
+};
+
+const formRow: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.04 },
+  },
+};
+
+const fieldPair: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.07, delayChildren: 0.02 },
+  },
+};
+
+const fieldLabel: Variants = {
+  hidden: { opacity: 0, x: -10 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.32, ease: easeOut },
+  },
+};
+
+const fieldControl: Variants = {
+  hidden: { opacity: 0, y: 10, scale: 0.99 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.38, ease: easeOut },
+  },
+};
+
+const submitBtn: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: easeOut },
+  },
+};
+
+const inputClassName =
+  "w-full rounded-lg border border-[#DDDDDD] px-4 py-3 text-[#1A1A1A] placeholder:text-[#AAAAAA] focus:border-[#3474F4] focus:outline-none focus:ring-2 focus:ring-[#3474F4]/20";
+
+const selectClassName =
+  "w-full appearance-none rounded-lg border border-[#DDDDDD] px-4 py-3 pr-10 text-[#1A1A1A] focus:border-[#3474F4] focus:outline-none focus:ring-2 focus:ring-[#3474F4]/20 [&>option]:text-[#1A1A1A] [&>option[value='']]:text-[#AAAAAA]";
+
 export function QuoteFormSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsSubmitting(true);
-    // TODO: Add server action or API call for quote submission
     await new Promise((r) => setTimeout(r, 800));
     setIsSubmitting(false);
   }
 
   return (
-    <section
+    <motion.section
       className="px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
-      style={{
-        background:
-          "linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(52, 116, 244, 0.2) 100%), #f0f4f8",
-      }}
+      style={sectionBg}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={viewport}
+      transition={{ duration: 0.45, ease: easeOut }}
     >
       <div className="mx-auto max-w-3xl">
-        {/* Header */}
-        <div className="mb-10 text-center">
-          <p className="text-base font-medium text-[#3474F4] sm:text-lg">
+        <motion.div
+          className="mb-10 text-center"
+          variants={headerBlock}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
+          <motion.p
+            className="text-base font-medium text-[#3474F4] sm:text-lg"
+            variants={headerEyebrow}
+          >
             Get Started
-          </p>
-          <h2 className="mt-2 text-3xl font-bold text-[#1A1A1A] sm:text-4xl lg:text-[2.5rem]">
+          </motion.p>
+          <motion.h2
+            className="mt-2 text-3xl font-bold text-[#1A1A1A] sm:text-4xl lg:text-[2.5rem]"
+            style={{ transformStyle: "preserve-3d" }}
+            variants={headerTitle}
+          >
             Get a Freight Quote Today
-          </h2>
-          <p className="mt-3 text-base text-[#555555] sm:text-lg">
-            Need reliable freight transportation? Contact our team for a fast
-            and competitive quote.
-          </p>
-        </div>
+          </motion.h2>
+          <motion.p
+            className="mt-3 text-base text-[#555555] sm:text-lg"
+            variants={headerSub}
+          >
+            Need reliable freight transportation? Contact our team for a fast and competitive quote.
+          </motion.p>
+        </motion.div>
 
-        {/* Form container */}
-        <div className="rounded-xl border-2 border-[#3474F4]/30 bg-white p-6 shadow-sm sm:p-8 md:p-10">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div className="space-y-2">
-                <label
+        <motion.div
+          className="rounded-xl border-2 border-[#3474F4]/30 bg-white p-6 shadow-sm sm:p-8 md:p-10"
+          variants={cardShell}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
+          <motion.form
+            onSubmit={handleSubmit}
+            className="space-y-6"
+            variants={formRoot}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+          >
+            <motion.div className="grid gap-6 sm:grid-cols-2" variants={formRow}>
+              <motion.div className="space-y-2" variants={fieldPair}>
+                <motion.label
                   htmlFor="fullName"
                   className="block text-sm font-semibold text-[#333333]"
+                  variants={fieldLabel}
                 >
                   Full Name
-                </label>
-                <input
+                </motion.label>
+                <motion.input
                   id="fullName"
                   name="fullName"
                   type="text"
                   placeholder="John Deo"
                   required
-                  className="w-full rounded-lg border border-[#DDDDDD] px-4 py-3 text-[#1A1A1A] placeholder:text-[#AAAAAA] focus:border-[#3474F4] focus:outline-none focus:ring-2 focus:ring-[#3474F4]/20"
+                  className={inputClassName}
+                  variants={fieldControl}
                 />
-              </div>
-              <div className="space-y-2">
-                <label
+              </motion.div>
+              <motion.div className="space-y-2" variants={fieldPair}>
+                <motion.label
                   htmlFor="email"
                   className="block text-sm font-semibold text-[#333333]"
+                  variants={fieldLabel}
                 >
                   Email
-                </label>
-                <input
+                </motion.label>
+                <motion.input
                   id="email"
                   name="email"
                   type="email"
                   placeholder="jenn@calcoast.com"
                   required
-                  className="w-full rounded-lg border border-[#DDDDDD] px-4 py-3 text-[#1A1A1A] placeholder:text-[#AAAAAA] focus:border-[#3474F4] focus:outline-none focus:ring-2 focus:ring-[#3474F4]/20"
+                  className={inputClassName}
+                  variants={fieldControl}
                 />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div className="space-y-2">
-                <label
+            <motion.div className="grid gap-6 sm:grid-cols-2" variants={formRow}>
+              <motion.div className="space-y-2" variants={fieldPair}>
+                <motion.label
                   htmlFor="phone"
                   className="block text-sm font-semibold text-[#333333]"
+                  variants={fieldLabel}
                 >
                   Phone
-                </label>
-                <input
+                </motion.label>
+                <motion.input
                   id="phone"
                   name="phone"
                   type="tel"
                   placeholder="(555) 000-0000"
-                  className="w-full rounded-lg border border-[#DDDDDD] px-4 py-3 text-[#1A1A1A] placeholder:text-[#AAAAAA] focus:border-[#3474F4] focus:outline-none focus:ring-2 focus:ring-[#3474F4]/20"
+                  className={inputClassName}
+                  variants={fieldControl}
                 />
-              </div>
-              <div className="space-y-2">
-                <label
+              </motion.div>
+              <motion.div className="space-y-2" variants={fieldPair}>
+                <motion.label
                   htmlFor="freightType"
                   className="block text-sm font-semibold text-[#333333]"
+                  variants={fieldLabel}
                 >
                   Freight Type
-                </label>
-
-                <div className="relative">
-                  <select
+                </motion.label>
+                <motion.div className="relative" variants={fieldControl}>
+                  <motion.select
                     id="freightType"
                     name="freightType"
-                    className="w-full rounded-lg border border-[#DDDDDD] 
-                 px-4 py-3 pr-10 
-                 text-[#1A1A1A] 
-                 appearance-none 
-                 focus:border-[#3474F4] 
-                 focus:outline-none 
-                 focus:ring-2 focus:ring-[#3474F4]/20
-                 [&>option]:text-[#1A1A1A]
-                 [&>option[value='']]:text-[#AAAAAA]"
+                    className={selectClassName}
                   >
                     <option value="">Select type...</option>
                     {freightTypes.map((type) => (
@@ -127,87 +265,102 @@ export function QuoteFormSection() {
                         {type}
                       </option>
                     ))}
-                  </select>
-
-                  {/* Custom Arrow */}
+                  </motion.select>
                   <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-                    <svg
-                      className="w-4 h-4 text-gray-400"
+                    <motion.svg
+                      className="h-4 w-4 text-gray-400"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
                       viewBox="0 0 24 24"
+                      aria-hidden
+                      initial={{ opacity: 0, y: -4 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={viewport}
+                      transition={{ delay: 0.15, duration: 0.35, ease: easeOut }}
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         d="M6 9l6 6 6-6"
                       />
-                    </svg>
+                    </motion.svg>
                   </div>
-                </div>
-              </div>
-            </div>
+                </motion.div>
+              </motion.div>
+            </motion.div>
 
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div className="space-y-2">
-                <label
+            <motion.div className="grid gap-6 sm:grid-cols-2" variants={formRow}>
+              <motion.div className="space-y-2" variants={fieldPair}>
+                <motion.label
                   htmlFor="origin"
                   className="block text-sm font-semibold text-[#333333]"
+                  variants={fieldLabel}
                 >
                   Origin
-                </label>
-                <input
+                </motion.label>
+                <motion.input
                   id="origin"
                   name="origin"
                   type="text"
                   placeholder="Fresno, CA"
-                  className="w-full rounded-lg border border-[#DDDDDD] px-4 py-3 text-[#1A1A1A] placeholder:text-[#AAAAAA] focus:border-[#3474F4] focus:outline-none focus:ring-2 focus:ring-[#3474F4]/20"
+                  className={inputClassName}
+                  variants={fieldControl}
                 />
-              </div>
-              <div className="space-y-2">
-                <label
+              </motion.div>
+              <motion.div className="space-y-2" variants={fieldPair}>
+                <motion.label
                   htmlFor="destination"
                   className="block text-sm font-semibold text-[#333333]"
+                  variants={fieldLabel}
                 >
                   Destination
-                </label>
-                <input
+                </motion.label>
+                <motion.input
                   id="destination"
                   name="destination"
                   type="text"
                   placeholder="Chicago, IL"
-                  className="w-full rounded-lg border border-[#DDDDDD] px-4 py-3 text-[#1A1A1A] placeholder:text-[#AAAAAA] focus:border-[#3474F4] focus:outline-none focus:ring-2 focus:ring-[#3474F4]/20"
+                  className={inputClassName}
+                  variants={fieldControl}
                 />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
-            <div className="space-y-2">
-              <label
-                htmlFor="details"
-                className="block text-sm font-semibold text-[#333333]"
+            <motion.div className="space-y-2" variants={formRow}>
+              <motion.div variants={fieldPair}>
+                <motion.label
+                  htmlFor="details"
+                  className="block text-sm font-semibold text-[#333333]"
+                  variants={fieldLabel}
+                >
+                  Additional Details
+                </motion.label>
+                <motion.textarea
+                  id="details"
+                  name="details"
+                  rows={4}
+                  placeholder="Tell us about your shipment..."
+                  className={`${inputClassName} resize-y`}
+                  variants={fieldControl}
+                />
+              </motion.div>
+            </motion.div>
+
+            <motion.div variants={submitBtn}>
+              <motion.button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full rounded-lg bg-[#3474F4] px-6 py-4 text-base font-semibold text-white shadow-md transition-colors hover:bg-[#285ee0] disabled:opacity-70"
+                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
               >
-                Additional Details
-              </label>
-              <textarea
-                id="details"
-                name="details"
-                rows={4}
-                placeholder="Tell us about your shipment..."
-                className="w-full resize-y rounded-lg border border-[#DDDDDD] px-4 py-3 text-[#1A1A1A] placeholder:text-[#AAAAAA] focus:border-[#3474F4] focus:outline-none focus:ring-2 focus:ring-[#3474F4]/20"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full rounded-lg bg-[#3474F4] px-6 py-4 text-base font-semibold text-white shadow-md transition-colors hover:bg-[#285ee0] disabled:opacity-70"
-            >
-              {isSubmitting ? "Submitting..." : "Request a Quote"}
-            </button>
-          </form>
-        </div>
+                {isSubmitting ? "Submitting..." : "Request a Quote"}
+              </motion.button>
+            </motion.div>
+          </motion.form>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

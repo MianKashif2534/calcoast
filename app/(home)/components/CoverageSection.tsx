@@ -1,68 +1,227 @@
 "use client";
 
+import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import truck from "@/app/assets/truck.png";
 
+const cities = [
+  "Little Rock, AR",
+  "Cleveland, OH",
+  "Tulsa, OK",
+  "Charlotte, NC",
+  "New Orleans, LA",
+  "Chicago, IL",
+  "Las Vegas, NV",
+  "Kansas City, MO",
+  "Pittsburgh, PA",
+];
+
+const easeOut = [0.22, 1, 0.36, 1] as const;
+
+const viewport = { once: true, margin: "-80px" };
+
+const headingBlock: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.11, delayChildren: 0.08 },
+  },
+};
+
+const labelVariant: Variants = {
+  hidden: { opacity: 0, y: -8, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.55, ease: easeOut },
+  },
+};
+
+const titleLineLeft: Variants = {
+  hidden: { opacity: 0, x: -28 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.55, ease: easeOut },
+  },
+};
+
+const titleLineRight: Variants = {
+  hidden: { opacity: 0, x: 28 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.55, ease: easeOut },
+  },
+};
+
+const titleGroup: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.14 },
+  },
+};
+
+const subcopyVariant: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut },
+  },
+};
+
+const gridContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.06, delayChildren: 0.2 },
+  },
+};
+
+const chipOuter: Variants = {
+  hidden: { opacity: 0, y: 18, rotateX: -8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      duration: 0.45,
+      ease: easeOut,
+      staggerChildren: 0.06,
+      delayChildren: 0.02,
+    },
+  },
+};
+
+const chipIcon: Variants = {
+  hidden: { opacity: 0, scale: 0.5, rotate: -12 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: { type: "spring", stiffness: 380, damping: 22 },
+  },
+};
+
+const chipLabel: Variants = {
+  hidden: { opacity: 0, x: 10 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.35, ease: easeOut },
+  },
+};
+
+const ctaVariant: Variants = {
+  hidden: { opacity: 0, y: 16, scale: 0.94 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: easeOut },
+  },
+};
+
 export function CoverageSection() {
-  const cities = [
-    "Little Rock, AR",
-    "Cleveland, OH",
-    "Tulsa, OK",
-    "Charlotte, NC",
-    "New Orleans, LA",
-    "Chicago, IL",
-    "Las Vegas, NV",
-    "Kansas City, MO",
-    "Pittsburgh, PA",
-  ];
-
   return (
-    <section className="relative py-20 text-white overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image src={truck} alt="bg" fill priority className="object-cover" />
-        <div className="absolute inset-0 bg-black/70"></div>
-      </div>
+    <section className="relative overflow-hidden py-20 text-white">
+      <motion.div
+        className="absolute inset-0"
+        initial={{ scale: 1.1 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.15, ease: easeOut }}
+      >
+        <Image src={truck} alt="Cal Coast freight truck" fill priority className="object-cover" />
+        <motion.div
+          className="absolute inset-0 bg-black/70"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65, ease: easeOut }}
+        />
+      </motion.div>
 
-      {/* Content */}
-      <div className="relative max-w-6xl mx-auto px-4 text-center">
-        {/* Heading */}
-        <p className="text-blue-400 text-sm font-medium">Service Coverage</p>
+      <div className="relative mx-auto max-w-6xl px-4 text-center">
+        <motion.div
+          variants={headingBlock}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
+          <motion.p
+            className="text-sm font-medium text-blue-400"
+            variants={labelVariant}
+          >
+            Service Coverage
+          </motion.p>
 
-        <h2 className="text-3xl md:text-4xl font-semibold mt-2 leading-snug">
-          Interstate Routes & <br /> Nationwide Coverage
-        </h2>
+          <motion.h2
+            className="mt-2 text-3xl font-semibold leading-snug md:text-4xl"
+            variants={titleGroup}
+          >
+            <motion.span className="block" variants={titleLineLeft}>
+              Interstate Routes &
+            </motion.span>
+            <motion.span className="block" variants={titleLineRight}>
+              Nationwide Coverage
+            </motion.span>
+          </motion.h2>
 
-        <p className="text-gray-300 mt-4 max-w-2xl mx-auto text-sm">
-          Serving the most popular freight lanes across the country with
-          reliable, on time delivery.
-        </p>
+          <motion.p
+            className="mx-auto mt-4 max-w-2xl text-sm text-gray-300"
+            variants={subcopyVariant}
+          >
+            Serving the most popular freight lanes across the country with reliable, on time
+            delivery.
+          </motion.p>
+        </motion.div>
 
-        {/* Cities Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10">
-          {cities.map((city, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-center gap-2 
-              bg-white text-blue-600 
-              px-3 py-2 rounded-lg 
-              text-xs md:text-sm font-medium 
-              shadow hover:scale-105 transition-all duration-300
-              h-[48px] w-full text-center"
+        <motion.div
+          className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3"
+          variants={gridContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
+          {cities.map((city) => (
+            <motion.div
+              key={city}
+              className="flex h-[48px] w-full items-center justify-center gap-2 rounded-lg bg-white px-3 py-2 text-center text-xs font-medium text-blue-600 shadow md:text-sm"
+              variants={chipOuter}
+              whileHover={{ scale: 1.05, y: -2 }}
+              transition={{ type: "spring", stiffness: 400, damping: 22 }}
             >
-              <FaMapMarkerAlt className="shrink-0 text-blue-600" />
-
-              {/* Text */}
-              <span className="leading-tight">{city}</span>
-            </div>
+              <motion.span className="inline-flex shrink-0 text-blue-600" variants={chipIcon}>
+                <FaMapMarkerAlt aria-hidden className="shrink-0" />
+              </motion.span>
+              <motion.span className="leading-tight" variants={chipLabel}>
+                {city}
+              </motion.span>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Button */}
-        <button className="mt-8 bg-blue-600 hover:bg-blue-700 transition-all duration-300 px-6 py-3 rounded-lg text-sm font-medium">
-          Get a Quote for Your Route →
-        </button>
+        <motion.div
+          variants={ctaVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          className="mt-8 flex justify-center"
+        >
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}>
+            <Link
+              href="/contact"
+              className="inline-block rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+            >
+              Get a Quote for Your Route →
+            </Link>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
