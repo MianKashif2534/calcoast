@@ -184,12 +184,12 @@ export function Navbar() {
             />
           </a>
           <div className="flex shrink-0 items-center justify-end gap-3">
-            <a
+            {/* <a
               href="/contact"
               className="inline-flex rounded-full bg-[#3474F4] px-3 py-2 text-xs font-semibold text-white shadow-lg shadow-blue-500/40 hover:bg-[#285ee0] sm:px-4 sm:text-sm"
             >
               Quote →
-            </a>
+            </a> */}
             <button
               type="button"
               onClick={() => setMenuOpen((prev) => !prev)}
