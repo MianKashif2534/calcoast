@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 import logo from "../assets/logo.png";
 
@@ -16,9 +16,6 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-const navLinksLeft = navLinks.slice(0, 3);
-const navLinksRight = navLinks.slice(3, 6);
-
 function linkActive(pathname: string, href: string) {
   if (href === "/#reviews") return false;
   return pathname === href;
@@ -30,225 +27,302 @@ export function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const mobileMenu = (
-    <>
-      <div
-        id="mobile-menu"
-        className={`fixed right-0 top-0 z-[9999] mt-4 h-auto w-[85%] max-w-sm rounded-2xl bg-white shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] md:hidden ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        } ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
-        aria-hidden={!menuOpen}
-        style={{ backgroundColor: "#ffffff" }}
-      >
-        <div className="relative flex flex-col gap-2 px-6 py-6 pt-14">
-          <button
-            type="button"
+  const handleReviewClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const reviewsSection = document.getElementById("reviews");
+    if (reviewsSection) {
+      const navbarHeight = 70;
+      const elementPosition = reviewsSection.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - navbarHeight;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+      setMenuOpen(false);
+    } else {
+      window.location.href = "/#reviews";
+    }
+  };
+
+  const MobileMenu = () => (
+    <AnimatePresence>
+      {menuOpen && (
+        <>
+          {/* Overlay */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9998] bg-black/30 backdrop-blur-sm md:hidden"
             onClick={() => setMenuOpen(false)}
-            className="absolute right-4 top-2 flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-gray-900 transition-colors hover:bg-gray-100 md:hidden"
-            aria-label="Close menu"
+          />
+
+          {/* Mobile Menu */}
+          <motion.div
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="fixed bottom-0 left-0 right-0 z-[9999] bg-gradient-to-b from-white to-gray-50 rounded-t-3xl shadow-2xl md:hidden"
+            style={{ maxHeight: "85vh" }}
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M18 6L6 18M6 6l12 12" />
-            </svg>
-          </button>
-          <nav className="flex flex-col gap-2">
-            <a
-              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
-              href="/"
-              onClick={() => setMenuOpen(false)}
-            >
-              Home
-            </a>
-            <a
-              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
-              href="/about"
-              onClick={() => setMenuOpen(false)}
-            >
-              About
-            </a>
-            <a
-              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
-              href="/services"
-              onClick={() => setMenuOpen(false)}
-            >
-              Services
-            </a>
-            <a
-              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
-              href="/why-us"
-              onClick={() => setMenuOpen(false)}
-            >
-              Why Us
-            </a>
-            <a
-              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
-              href="/#reviews"
-              onClick={() => setMenuOpen(false)}
-            >
-              Reviews
-            </a>
-            <a
-              className="rounded-full bg-[#0055FF] px-4 py-2 text-sm font-medium text-white"
-              href="/contact"
-              onClick={() => setMenuOpen(false)}
-            >
-              Contact
-            </a>
-            <a
-              href="/contact"
-              className="mt-1 rounded-full bg-[#3474F4] px-4 py-2 text-sm font-semibold text-white"
-              onClick={() => setMenuOpen(false)}
-            >
-              Request a Quote →
-            </a>
-          </nav>
-        </div>
-      </div>
-      <div
-        className={`fixed inset-0 z-[9998] bg-black/30 backdrop-blur-md transition-opacity duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] md:hidden ${
-          menuOpen ? "opacity-100" : "opacity-0"
-        } ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
-        onClick={() => setMenuOpen(false)}
-        aria-hidden={!menuOpen}
-      />
-    </>
+            <div className="flex flex-col h-full">
+              {/* Handle */}
+              <div className="flex justify-center pt-0 pb-1">
+                <div className="h-1 w-12 rounded-full bg-gradient-to-r from-blue-400 to-blue-600" />
+              </div>
+
+              {/* Logo */}
+              <div className="flex justify-center py-4">
+                <Image
+                  src={logo}
+                  alt="Calcoast"
+                  height={32}
+                  width={120}
+                  className="opacity-90"
+                  priority
+                />
+              </div>
+
+              {/* Links */}
+              <nav className="flex-1 overflow-y-auto px-2 pb-4">
+                <div className="space-y-0">
+                  {navLinks.map(({ label, href }, index) => {
+                    const isActive = linkActive(pathname, href);
+                    const isReviews = href === "/#reviews";
+
+                    return (
+                      <motion.a
+                        key={href}
+                        href={href}
+                        onClick={(e) => {
+                          if (isReviews) handleReviewClick(e);
+                          else setMenuOpen(false);
+                        }}
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        className={`flex justify-between items-center px-5 py-4 rounded-2xl text-[17px] font-semibold tracking-wide transition-all duration-300 ${
+                          isActive
+                            ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg"
+                            : "text-gray-700 hover:bg-gray-100 hover:translate-x-1"
+                        }`}
+                      >
+                        <span className="flex items-center gap-1">
+                          <span className="text-xl">
+                            {label === "Home"}
+                            {label === "About"}
+                            {label === "Services"}
+                            {label === "Why Us"}
+                            {label === "Reviews"}
+                            {label === "Contact"}
+                          </span>
+                          {label}
+                        </span>
+                        {isActive && (
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="h-2 w-2 bg-white rounded-full shadow-lg"
+                          />
+                        )}
+                      </motion.a>
+                    );
+                  })}
+                </div>
+              </nav>
+
+              {/* Button */}
+              <div className="border-t border-gray-200 p-5 pb-7">
+                <motion.a
+                  href="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex justify-center items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3.5 rounded-2xl text-base font-bold tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span>✨</span>
+                  Get Free Quote
+                  <span>→</span>
+                </motion.a>
+              </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 
-  const renderNavLinks = (links: typeof navLinks) =>
-    links.map(({ label, href }) => {
-      const isActive = linkActive(pathname, href);
-      const linkClass = scrolled
-        ? isActive
-          ? "bg-[#0055FF]/12 text-[#0055FF] shadow-sm"
-          : "text-[#0055FF] hover:bg-[#0055FF]/10"
-        : isActive
-          ? "bg-white/80 text-[#0055FF] shadow-lg shadow-white/30"
-          : "text-white hover:bg-white/10";
-      return (
-        <a
-          key={href}
-          className={`rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 sm:px-5 ${linkClass}`}
-          href={href}
-        >
-          {label}
-        </a>
-      );
-    });
-
   return (
-    <header
-      className={`fixed inset-x-0 z-[100] bg-transparent transition-[top] duration-[900ms] ease-[cubic-bezier(0.33,1,0.68,1)] ${
-        scrolled ? "top-0" : "top-6"
-      }`}
-    >
-      <div
-        className={`mx-auto w-full transition-[max-width,padding] duration-[900ms] ease-[cubic-bezier(0.33,1,0.68,1)] ${
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-[100] transition-all duration-500 ${
           scrolled
-            ? "max-w-full p-0"
-            : "max-w-6xl px-4 py-3 sm:px-6 lg:px-8"
+            ? "bg-white/95 backdrop-blur-md shadow-lg py-2"
+            : "bg-gradient-to-r from-blue-600 via-blue-600 to-blue-700 py-3"
         }`}
       >
-        {/* One continuous blue bar: left links | logo | right links */}
-        <nav
-          className={`hidden w-full items-center gap-1 transition-[border-radius,padding,background-color,box-shadow] duration-[900ms] ease-[cubic-bezier(0.33,1,0.68,1)] md:flex ${
-            scrolled
-              ? "rounded-none bg-white p-2 shadow-md shadow-black/10"
-              : "rounded-lg bg-[#0055FF] p-1 shadow-lg shadow-blue-500/30"
-          }`}
-          aria-label="Main"
-        >
-          <div className="flex min-h-10 flex-1 flex-wrap items-center justify-around gap-0">
-            {renderNavLinks(navLinksLeft)}
-          </div>
-          <a
-            href="/"
-            className="flex shrink-0 items-center px-3 sm:px-4"
-          >
-            <Image
-              src={logo}
-              alt="Calcoast Logistics"
-              height={40}
-              width={180}
-              className="h-10 w-auto"
-              priority
-            />
-          </a>  
-          <div className="flex min-h-10 flex-1 flex-wrap items-center justify-around gap-0">
-            {renderNavLinks(navLinksRight)}
-          </div>
-        </nav>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center justify-between">
+            {/* Logo */}
+            <motion.a
+              href="/"
+              className="flex-shrink-0"
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <Image
+                src={logo}
+                alt="Calcoast Logistics"
+                height={44}
+                width={180}
+                className={`h-11 w-auto transition-all duration-300 ${
+                  scrolled ? "brightness-100" : "brightness-0 invert"
+                }`}
+                priority
+              />
+            </motion.a>
 
-        <div className="flex items-center justify-between gap-4 md:hidden">
-          <a href="/" className="flex shrink-0 items-center">
-            <Image
-              src={logo}
-              alt="Calcoast Logistics"
-              height={40}
-              width={180}
-              className="h-10 w-auto"
-              priority
-            />
-          </a>
-          <div className="flex shrink-0 items-center justify-end gap-3">
-            {/* <a
+            {/* Desktop Navigation Links */}
+            <nav className="flex items-center gap-2">
+              {navLinks.map(({ label, href }) => {
+                const isActive = linkActive(pathname, href);
+                const isReviews = href === "/#reviews";
+
+                return (
+                  <motion.a
+                    key={href}
+                    href={href}
+                    onClick={(e) => {
+                      if (isReviews) {
+                        e.preventDefault();
+                        const reviewsSection =
+                          document.getElementById("reviews");
+                        if (reviewsSection) {
+                          const navbarHeight = 70;
+                          const elementPosition =
+                            reviewsSection.getBoundingClientRect().top;
+                          const offsetPosition =
+                            elementPosition + window.pageYOffset - navbarHeight;
+                          window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth",
+                          });
+                        } else {
+                          window.location.href = "/#reviews";
+                        }
+                      }
+                    }}
+                    className={`relative px-4 py-2 text-[15px] font-semibold tracking-wide rounded-xl transition-all duration-300 ${
+                      scrolled
+                        ? isActive
+                          ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md"
+                          : "text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+                        : isActive
+                          ? "bg-white/25 text-white shadow-lg backdrop-blur-sm"
+                          : "text-white/90 hover:text-white hover:bg-white/15"
+                    }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    {label}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute -bottom-1 left-2 right-2 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"
+                        transition={{
+                          type: "spring",
+                          stiffness: 500,
+                          damping: 30,
+                        }}
+                      />
+                    )}
+                  </motion.a>
+                );
+              })}
+            </nav>
+
+            {/* Desktop CTA Button */}
+            <motion.a
               href="/contact"
-              className="inline-flex rounded-full bg-[#3474F4] px-3 py-2 text-xs font-semibold text-white shadow-lg shadow-blue-500/40 hover:bg-[#285ee0] sm:px-4 sm:text-sm"
+              className={`inline-flex items-center gap-2 rounded-xl px-5 py-2 text-[15px] font-bold tracking-wide transition-all duration-300 ${
+                scrolled
+                  ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:shadow-lg"
+                  : "bg-white/25 text-white hover:bg-white/35 backdrop-blur-sm"
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
             >
-              Quote →
-            </a> */}
-            <button
-              type="button"
-              onClick={() => setMenuOpen((prev) => !prev)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-900"
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
+              <span>🚀</span>
+              Get Started
+              <span>→</span>
+            </motion.a>
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="flex md:hidden items-center justify-between">
+            {/* Logo */}
+            <motion.a
+              href="/"
+              className="flex-shrink-0"
+              whileTap={{ scale: 0.98 }}
             >
-              <span className="sr-only">{menuOpen ? "Close menu" : "Open main menu"}</span>
-              {menuOpen ? (
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M18 6L6 18M6 6l12 12" />
-                </svg>
-              ) : (
-                <div className="flex flex-col gap-[3px]">
-                  <span className="block h-0.5 w-5 rounded bg-gray-900" />
-                  <span className="block h-0.5 w-5 rounded bg-gray-900" />
-                  <span className="block h-0.5 w-5 rounded bg-gray-900" />
-                </div>
-              )}
-            </button>
+              <Image
+                src={logo}
+                alt="Calcoast"
+                height={34}
+                width={140}
+                className={`h-8.5 w-auto transition-all duration-300 ${
+                  scrolled ? "brightness-100" : "brightness-0 invert"
+                }`}
+                priority
+              />
+            </motion.a>
+
+            {/* Menu Button */}
+            <motion.button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className={`h-9 w-9 flex flex-col justify-center items-center gap-1 rounded-xl transition-all ${
+                scrolled
+                  ? "bg-gray-100 text-gray-700"
+                  : "bg-white/25 text-white backdrop-blur-sm"
+              }`}
+              whileTap={{ scale: 0.92 }}
+            >
+              <span
+                className={`block h-0.5 w-4.5 rounded-full bg-current transition-all duration-100 ${
+                  menuOpen ? "rotate-45 translate-y-1.5" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-4.5 rounded-full bg-current transition-all duration-200 ${
+                  menuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-4.5 rounded-full bg-current transition-all duration-200 ${
+                  menuOpen ? "-rotate-45 -translate-y-1.5" : ""
+                }`}
+              />
+            </motion.button>
           </div>
         </div>
-      </div>
-      {mounted && createPortal(mobileMenu, document.body)}
-    </header>
+      </header>
+
+      {/* Spacer */}
+      <div className="h-14 md:h-16" />
+
+      {mounted && <MobileMenu />}
+    </>
   );
 }
