@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FiTrendingUp } from "react-icons/fi";
 import { FaTruck, FaMapMarkerAlt } from "react-icons/fa";
@@ -12,16 +12,20 @@ export function StatsSection() {
   const [miles, setMiles] = useState(0);
   const [rating, setRating] = useState(0);
 
+  const [hasStarted, setHasStarted] = useState(false);
+
   useEffect(() => {
-    const interval = setInterval(() => {
+    if (!hasStarted) return;
+
+    const interval = window.setInterval(() => {
       setYears((prev) => (prev < 10 ? prev + 1 : 10));
       setFleet((prev) => (prev < 35 ? prev + 1 : 35));
       setMiles((prev) => (prev < 14 ? prev + 1 : 14));
-      setRating((prev) => (prev < 5 ? prev + 0.1 : 5));
+      setRating((prev) => (prev < 5 ? Math.min(5, prev + 0.1) : 5));
     }, 80);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => window.clearInterval(interval);
+  }, [hasStarted]);
 
   const container = {
     hidden: {},
@@ -61,6 +65,7 @@ export function StatsSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
+          onViewportEnter={() => setHasStarted(true)}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center"
         >
           {/* Card */}

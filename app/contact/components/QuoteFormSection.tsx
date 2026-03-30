@@ -18,7 +18,7 @@ const viewport = { once: true, margin: "-60px" };
 
 const sectionBg = {
   background:
-    "linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(52, 116, 244, 0.2) 100%), #f0f4f8",
+    "radial-gradient(1200px 520px at 50% -120px, rgba(52, 116, 244, 0.28), rgba(52, 116, 244, 0) 60%), radial-gradient(900px 420px at 12% 26%, rgba(90, 168, 255, 0.18), rgba(90, 168, 255, 0) 65%), radial-gradient(900px 420px at 88% 18%, rgba(30, 64, 175, 0.12), rgba(30, 64, 175, 0) 60%), linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(52, 116, 244, 0.1) 60%, rgba(240, 244, 248, 1) 100%), #f0f4f8",
 };
 
 const headerBlock: Variants = {
@@ -120,10 +120,10 @@ const submitBtn: Variants = {
 };
 
 const inputClassName =
-  "w-full rounded-lg border border-[#DDDDDD] px-4 py-3 text-[#1A1A1A] placeholder:text-[#AAAAAA] focus:border-[#3474F4] focus:outline-none focus:ring-2 focus:ring-[#3474F4]/20";
+  "w-full rounded-lg border border-transparent bg-[linear-gradient(#ffffff,#ffffff)_padding-box,linear-gradient(90deg,rgba(52,116,244,0.55),rgba(90,168,255,0.55),rgba(52,116,244,0.55))_border-box] px-4 py-3 text-[#1A1A1A] placeholder:text-[#8A93A3] shadow-[0_0_0_1px_rgba(52,116,244,0.12),0_10px_22px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-200 outline-none shadow-[0_0_0_2px_rgba(52,116,244,0.25),0_0_28px_rgba(52,116,244,0.18),0_16px_28px_rgba(15,23,42,0.07)]";
 
 const selectClassName =
-  "w-full appearance-none rounded-lg border border-[#DDDDDD] px-4 py-3 pr-10 text-[#1A1A1A] focus:border-[#3474F4] focus:outline-none focus:ring-2 focus:ring-[#3474F4]/20 [&>option]:text-[#1A1A1A] [&>option[value='']]:text-[#AAAAAA]";
+  "w-full appearance-none rounded-lg border border-transparent bg-[linear-gradient(#ffffff,#ffffff)_padding-box,linear-gradient(90deg,rgba(52,116,244,0.55),rgba(90,168,255,0.55),rgba(52,116,244,0.55))_border-box] px-4 py-3 pr-10 text-[#1A1A1A] shadow-[0_0_0_1px_rgba(52,116,244,0.12),0_10px_22px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-200 outline-none shadow-[0_0_0_2px_rgba(52,116,244,0.25),0_0_28px_rgba(52,116,244,0.18),0_16px_28px_rgba(15,23,42,0.07)] [&>option]:text-[#1A1A1A] [&>option[value='']]:text-[#8A93A3]";
 
 export function QuoteFormSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -173,21 +173,17 @@ export function QuoteFormSection() {
           </motion.p>
         </motion.div>
 
-        <motion.div
-          className="rounded-xl border-2 border-[#3474F4]/30 bg-white p-6 shadow-sm sm:p-8 md:p-10"
-          variants={cardShell}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-        >
-          <motion.form
-            onSubmit={handleSubmit}
-            className="space-y-6"
-            variants={formRoot}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
-          >
+        <motion.div variants={cardShell} initial="hidden" whileInView="visible" viewport={viewport}>
+          <div className="rounded-2xl bg-gradient-to-br from-[#3474F4]/55 via-[#5AA8FF]/55 to-[#1E40AF]/55 p-[2px] shadow-[0_0_0_1px_rgba(52,116,244,0.10),0_0_45px_rgba(52,116,244,0.18),0_18px_40px_rgba(15,23,42,0.10)]">
+            <div className="rounded-2xl bg-white/90 p-6 backdrop-blur-[2px] sm:p-8 md:p-10">
+              <motion.form
+                onSubmit={handleSubmit}
+                className="space-y-6"
+                variants={formRoot}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewport}
+              >
             <motion.div className="grid gap-6 sm:grid-cols-2" variants={formRow}>
               <motion.div className="space-y-2" variants={fieldPair}>
                 <motion.label
@@ -347,18 +343,20 @@ export function QuoteFormSection() {
               </motion.div>
             </motion.div>
 
-            <motion.div variants={submitBtn}>
-              <motion.button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full rounded-lg bg-[#3474F4] px-6 py-4 text-base font-semibold text-white shadow-md transition-colors hover:bg-[#285ee0] disabled:opacity-70"
-                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-              >
-                {isSubmitting ? "Submitting..." : "Request a Quote"}
-              </motion.button>
-            </motion.div>
-          </motion.form>
+                <motion.div variants={submitBtn}>
+                  <motion.button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full rounded-lg bg-[#3474F4] px-6 py-4 text-base font-semibold text-white shadow-[0_0_0_1px_rgba(255,255,255,0.15)_inset,0_12px_24px_rgba(52,116,244,0.22),0_18px_34px_rgba(15,23,42,0.14)] transition-[background-color,box-shadow,transform] hover:bg-[#2F6AF0] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.18)_inset,0_0_32px_rgba(52,116,244,0.28),0_20px_40px_rgba(15,23,42,0.16)] disabled:opacity-70"
+                    whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                    whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                  >
+                    {isSubmitting ? "Submitting..." : "Request a Quote"}
+                  </motion.button>
+                </motion.div>
+              </motion.form>
+            </div>
+          </div>
         </motion.div>
       </div>
     </motion.section>

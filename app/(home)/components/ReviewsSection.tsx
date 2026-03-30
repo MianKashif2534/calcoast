@@ -28,8 +28,8 @@ export function ReviewsSection() {
         authorMeta: "Oregon · February 2024",
       },
       {
-        ratingText: "5.0 / 5.0 Rating",
-        rating: 5,
+        ratingText: "4.9 / 5.0 Rating",
+        rating: 4.9,
         headline: "Verified Reviews",
         title: "What Brokers Say",
         topTags: ["Perfect Service", "Fast Updates", "No Surprises"],
@@ -40,14 +40,14 @@ export function ReviewsSection() {
         authorMeta: "California · January 2024",
       },
       {
-        ratingText: "5.0 / 5.0 Rating",
-        rating: 5,
+        ratingText: "4.8 / 5.0 Rating",
+        rating: 4.8,
         headline: "Verified Reviews",
         title: "What Brokers Say",
-        topTags: ["10/10 Reliability", "Great Drivers", "Strong Dispatch"],
+        topTags: ["9/10 Reliability", "Great Drivers", "Strong Dispatch"],
         quote:
-          `"Driver was professional and easy to work with. Dispatch responded fast and kept us in the loop. Everything went exactly as planned."`,
-        smallTags: ["Professional Driver", "Consistent Tracking", "Responsive Dispatch", "On Time Pickup", "On Time Delivery"],
+          `"Driver was professional and easy to work with. Dispatch responded fast and kept us in the loop. Minor delay on pickup but delivery was still on time."`,
+        smallTags: ["Professional Driver", "Consistent Tracking", "Responsive Dispatch", "On Time Delivery", "Good Communication"],
         authorTitle: "Verified Broker",
         authorMeta: "Texas · March 2024",
       },
@@ -64,8 +64,8 @@ export function ReviewsSection() {
         authorMeta: "Nevada · December 2023",
       },
       {
-        ratingText: "5.0 / 5.0 Rating",
-        rating: 5,
+        ratingText: "4.9 / 5.0 Rating",
+        rating: 4.9,
         headline: "Verified Reviews",
         title: "What Brokers Say",
         topTags: ["Quick Turnaround", "Great Tracking", "On Time"],
@@ -76,14 +76,14 @@ export function ReviewsSection() {
         authorMeta: "Arizona · November 2023",
       },
       {
-        ratingText: "5.0 / 5.0 Rating",
-        rating: 5,
+        ratingText: "4.8 / 5.0 Rating",
+        rating: 4.8,
         headline: "Verified Reviews",
         title: "What Brokers Say",
-        topTags: ["Top Tier Carrier", "Trusted Partner", "5-Star Service"],
+        topTags: ["Reliable Carrier", "Trusted Partner", "Solid Service"],
         quote:
-          `"They treat freight like it's their own. Great communication, dependable execution, and always professional. A trusted partner."`,
-        smallTags: ["Trusted Carrier", "Strong Communication", "Professional Team", "Reliable Service", "Great Experience"],
+          `"They treat freight like it's their own. Great communication and dependable execution. Paperwork took a bit longer than expected but overall a strong partner."`,
+        smallTags: ["Trusted Carrier", "Strong Communication", "Professional Team", "Reliable Service", "Good Experience"],
         authorTitle: "Verified Broker",
         authorMeta: "Washington · April 2024",
       },
@@ -168,7 +168,7 @@ export function ReviewsSection() {
                   animate="show"
                   className="mb-2 flex gap-1 text-yellow-400"
                 >
-                  {[...Array(active.rating)].map((_, i) => (
+                  {[...Array(Math.round(active.rating))].map((_, i) => (
                     <motion.div key={i} variants={fadeUp}>
                       <FaStar />
                     </motion.div>
@@ -249,7 +249,7 @@ export function ReviewsSection() {
 
                 <div className="flex items-center gap-1 text-yellow-400">
                   <FaStar />
-                  <span className="font-medium text-white">5.0</span>
+                  <span className="font-medium text-white">{active.rating.toFixed(1)}</span>
                 </div>
               </motion.div>
             </motion.div>

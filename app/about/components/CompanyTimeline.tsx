@@ -9,7 +9,7 @@ const timeline = [
   {
     year: "2015",
     title: "Company Founded",
-    desc: "Cal Coast Logistics established in Fresno, CA with FMCSA common authority.",
+    desc: "Cal Coast Logistics established in Fresno, CA.",
   },
   {
     year: "2017",
@@ -29,7 +29,7 @@ const timeline = [
   {
     year: "2024",
     title: "35+ Fleet Assets",
-    desc: "Reached 35+ owned trucks with perfect 5.0 carrier rating from verified brokers.",
+    desc: "Reached 35+ owned trucks with a 4.8 carrier rating from verified brokers.",
   },
 ];
 
