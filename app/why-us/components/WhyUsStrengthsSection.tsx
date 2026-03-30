@@ -1,8 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 
-const strengths = [
+interface Strength {
+  title: string;
+  description: string;
+  stat: string;
+  icon: React.ReactNode;
+}
+
+const strengths: Strength[] = [
   {
     title: "On Time Delivery",
     description:
@@ -132,8 +140,85 @@ const strengths = [
 ];
 
 export function WhyUsStrengthsSection() {
+  const [typedHeading, setTypedHeading] = useState("");
+  const [hasTyped, setHasTyped] = useState(false);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const fullHeading = "The Cal Coast Advantage";
+
+  const [typedStats, setTypedStats] = useState<Record<number, string>>({});
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const observers = useRef<IntersectionObserver[]>([]);
+  const animatedRef = useRef<Record<number, boolean>>({});
+
+  // Heading typewriter
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasTyped) {
+            let i = 0;
+            const interval = setInterval(() => {
+              setTypedHeading(fullHeading.slice(0, i + 1));
+              i++;
+              if (i === fullHeading.length) {
+                clearInterval(interval);
+                setHasTyped(true);
+              }
+            }, 80);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+
+    if (headingRef.current) observer.observe(headingRef.current);
+    return () => observer.disconnect();
+  }, [hasTyped]);
+
+  // Setup per-card typewriter observers after refs are attached
+  useLayoutEffect(() => {
+    // Clean up previous observers
+    observers.current.forEach((obs) => obs.disconnect());
+    observers.current = [];
+
+    cardRefs.current.forEach((card, idx) => {
+      if (!card) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !animatedRef.current[idx]) {
+              animatedRef.current[idx] = true;
+              const fullStat = strengths[idx].stat;
+              let i = 0;
+              const interval = setInterval(() => {
+                setTypedStats((prev) => ({
+                  ...prev,
+                  [idx]: fullStat.slice(0, i + 1),
+                }));
+                i++;
+                if (i === fullStat.length) clearInterval(interval);
+              }, 50);
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+
+      observer.observe(card);
+      observers.current.push(observer);
+    });
+
+    return () => {
+      observers.current.forEach((obs) => obs.disconnect());
+      observers.current = [];
+    };
+  }, []); // runs once after first render
+
   return (
-    <section className="bg-[#E6EEFF] px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+    <section className="bg-[#E6EEFF] px-4 py-16 sm:px-6 sm:py-20 lg:px-8 overflow-hidden">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -145,8 +230,16 @@ export function WhyUsStrengthsSection() {
           <p className="text-base font-medium text-[#3B82F6] sm:text-lg">
             Our Strengths
           </p>
-          <h2 className="mt-2 text-3xl font-bold text-black sm:text-4xl lg:text-[2.5rem]">
-            The Cal Coast Advantage
+          <h2
+            ref={headingRef}
+            className="mt-2 text-3xl font-bold text-black sm:text-4xl lg:text-[2.5rem]"
+          >
+            {typedHeading || (hasTyped ? fullHeading : "")}
+            {!hasTyped && typedHeading.length < fullHeading.length && (
+              <span className="animate-pulse border-r-2 border-black ml-1">
+                |
+              </span>
+            )}
           </h2>
         </motion.div>
 
@@ -154,6 +247,9 @@ export function WhyUsStrengthsSection() {
           {strengths.map((item, index) => (
             <motion.div
               key={item.title}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
@@ -176,12 +272,18 @@ export function WhyUsStrengthsSection() {
                 {item.description}
               </p>
 
-              <motion.p
-                whileHover={{ scale: 1.1 }}
-                className="mt-4 text-base font-bold text-white sm:text-lg"
-              >
-                {item.stat}
-              </motion.p>
+              <div className="mt-4 text-base font-bold text-white sm:text-lg">
+                {typedStats[index] ? (
+                  typedStats[index]
+                ) : (
+                  <span className="invisible">{item.stat}</span>
+                )}
+                {!typedStats[index] && (
+                  <span className="animate-pulse border-r-2 border-white ml-1">
+                    |
+                  </span>
+                )}
+              </div>
             </motion.div>
           ))}
         </div>
