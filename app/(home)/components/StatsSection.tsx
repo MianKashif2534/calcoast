@@ -11,7 +11,6 @@ export function StatsSection() {
   const [fleet, setFleet] = useState(0);
   const [miles, setMiles] = useState(0);
   const [rating, setRating] = useState(0);
-
   const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
@@ -59,7 +58,7 @@ export function StatsSection() {
           </p>
         </motion.div>
 
-        {/* Stats Grid */}
+        {/* Grid */}
         <motion.div
           variants={container}
           initial="hidden"
@@ -68,7 +67,6 @@ export function StatsSection() {
           onViewportEnter={() => setHasStarted(true)}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center"
         >
-          {/* Card */}
           {[
             {
               icon: <FiTrendingUp />,
@@ -99,30 +97,55 @@ export function StatsSection() {
               key={index}
               variants={cardAnim}
               transition={{ duration: 0.5 }}
-              whileHover={{ scale: 1.07, y: -5 }}
-              className="w-[240px] h-[220px] bg-[#0055FF]/60 rounded-xl border border-white/20 flex flex-col items-center justify-center text-center p-6 backdrop-blur-md"
+              whileHover={{ scale: 1.07, y: -8 }}
+              className="relative w-[240px] h-[220px] rounded-xl p-[2px] group overflow-hidden"
             >
-              {/* Icon */}
-              <motion.div
-                animate={{ y: [0, -5, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="text-white text-3xl mb-3"
-              >
-                {item.icon}
-              </motion.div>
+              {/* 🔥 Animated Gradient Border  */}
+              <div
+                className="absolute inset-0 rounded-xl blur-[8px] opacity-70 group-hover:opacity-100 transition duration-300"
+                style={{
+                  background:
+                    "conic-gradient(from 0deg, red, orange, yellow, green, cyan, blue, purple, red)",
+                  animation: "spin 6s linear infinite",
+                }}
+              />
 
-              {/* Value */}
-              <div className="text-[42px] font-bold text-white leading-none">
-                {item.value}
+              {/* Inner Card */}
+              <div className="relative w-full h-full bg-[#0C0D74] rounded-xl flex flex-col items-center justify-center text-center p-6 border border-white/10 backdrop-blur-md shadow-lg group-hover:shadow-[0_0_40px_rgba(0,255,255,0.6)] transition-all duration-300">
+                {/* Icon */}
+                <motion.div
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="text-white text-3xl mb-3"
+                >
+                  {item.icon}
+                </motion.div>
+
+                {/* Value */}
+                <div className="text-[42px] font-bold text-white leading-none">
+                  {item.value}
+                </div>
+
+                {/* Title */}
+                <p className="text-[20px] text-white mt-2 font-medium">
+                  {item.title}
+                </p>
+
+                {/* Sub */}
+                <p className="text-[12px] text-white/60">{item.sub}</p>
               </div>
 
-              {/* Title */}
-              <p className="text-[25px] text-white mt-2 font-medium">
-                {item.title}
-              </p>
-
-              {/* Sub */}
-              <p className="text-[12px] text-white/60">{item.sub}</p>
+              {/* 🔥 Inline Keyframes */}
+              <style jsx>{`
+                @keyframes spin {
+                  0% {
+                    transform: rotate(0deg);
+                  }
+                  100% {
+                    transform: rotate(360deg);
+                  }
+                }
+              `}</style>
             </motion.div>
           ))}
         </motion.div>

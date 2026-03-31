@@ -2,7 +2,7 @@ import { AboutPage } from "./components/AboutPage";
 import HomeAboutSection from "@/app/(home)/components/HomeAboutSection";
 import { CoreValuesSection } from "./components/CoreValuesSection";
 import { CompanyTimeline } from "./components/CompanyTimeline";
-import { Stats } from "./components/Stats";
+import { StatsSection } from "@/app/(home)/components/StatsSection";
 
 export default function About() {
   return (
@@ -11,7 +11,7 @@ export default function About() {
       <HomeAboutSection />
       <CoreValuesSection />
       <CompanyTimeline />
-      <Stats />
+      <StatsSection />
     </>
   );
 }

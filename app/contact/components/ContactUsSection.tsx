@@ -93,25 +93,65 @@ const bannerText: Variants = {
 
 function IconPhone(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+    <svg
+      width="20"
+      height="20"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+      />
     </svg>
   );
 }
 
 function IconEmail(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    <svg
+      width="20"
+      height="20"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+      />
     </svg>
   );
 }
 
 function IconPin(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+    <svg
+      width="20"
+      height="20"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+      {...props}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+      />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+      />
     </svg>
   );
 }
@@ -173,7 +213,9 @@ export function ContactUsSection() {
               key={card.title}
               href={card.href}
               target={card.href.startsWith("http") ? "_blank" : undefined}
-              rel={card.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              rel={
+                card.href.startsWith("http") ? "noopener noreferrer" : undefined
+              }
               className={`flex flex-col rounded-2xl p-6 ${
                 card.dark
                   ? "bg-[#020840] text-white"
@@ -186,13 +228,18 @@ export function ContactUsSection() {
             >
               <motion.span
                 className={`mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${
-                  card.dark ? "bg-white/20 text-white" : "bg-gray-200 text-[#020840]"
+                  card.dark
+                    ? "bg-white/20 text-white"
+                    : "bg-gray-200 text-[#020840]"
                 }`}
                 variants={cardIconWrap}
               >
                 <card.Icon className="h-5 w-5" aria-hidden />
               </motion.span>
-              <motion.h3 className="text-lg font-bold sm:text-xl" variants={cardTitle}>
+              <motion.h3
+                className="text-lg font-bold sm:text-xl"
+                variants={cardTitle}
+              >
                 {card.title}
               </motion.h3>
               <motion.p
@@ -201,7 +248,10 @@ export function ContactUsSection() {
               >
                 {card.description}
               </motion.p>
-              <motion.p className="mt-3 text-base font-bold sm:text-lg" variants={cardDetail}>
+              <motion.p
+                className="mt-3 text-base font-bold sm:text-lg"
+                variants={cardDetail}
+              >
                 {card.detail}
               </motion.p>
             </motion.a>
@@ -220,7 +270,8 @@ export function ContactUsSection() {
               className="text-base font-medium text-[#3474F4] sm:text-lg"
               variants={bannerText}
             >
-              Available 24/7 : We&apos;re here to support your logistics needs around the clock.
+              Available 24/7 : We&apos;re here to support your logistics needs
+              around the clock.
             </motion.p>
           </motion.div>
         </div>

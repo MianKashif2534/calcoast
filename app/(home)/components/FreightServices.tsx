@@ -127,7 +127,6 @@ export function FreightServices() {
 
         {/* Button */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
@@ -135,11 +134,38 @@ export function FreightServices() {
         >
           <MotionLink
             href="/contact"
-            whileHover={{ scale: 1.08 }}
+            whileHover={{ scale: 1.08, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block rounded-md bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700"
+            className="relative inline-block rounded-md p-[2px] overflow-hidden"
           >
-            Get a Freight Quote →
+            {/* Animated Border */}
+            <span
+              className="absolute inset-0 rounded-md animate-[spin_3s_linear_infinite] blur-[3px]"
+              style={{
+                background:
+                  "conic-gradient(from 0deg, #ff0000, #ffff00, #ff0000)",
+              }}
+            ></span>
+
+            {/* Inner dark layer for contrast */}
+            <span className="absolute inset-[2px] rounded-md bg-black/80 backdrop-blur-sm"></span>
+
+            {/* Button Content */}
+            <span className="relative z-10 flex items-center gap-2 rounded-md bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),0_8px_20px_rgba(0,0,0,0.4)] transition-all duration-300">
+              {/* Text */}
+              Get a Freight Quote
+              {/* Animated Arrow */}
+              <motion.span
+                className="inline-block"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                →
+              </motion.span>
+            </span>
+
+            {/* Top light shine */}
+            <span className="pointer-events-none absolute inset-0 rounded-md bg-gradient-to-b from-white/20 to-transparent opacity-40"></span>
           </MotionLink>
         </motion.div>
       </div>
