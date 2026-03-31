@@ -6,13 +6,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 import logo from "../assets/logo.png";
+import { useScrollState } from "./ScrollContext";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Why Us", href: "/why-us" },
-  { label: "Drivers", href: "https://intelliapp.driverapponline.com/c/calcoastlogistics" },
+  { label: "Drivers", href: "/https://intelliapp.driverapponline.com/c/calcoastlogistics" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -28,7 +29,7 @@ export function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const { scrolled, setScrolled } = useScrollState();
 
   useEffect(() => {
     setMounted(true);

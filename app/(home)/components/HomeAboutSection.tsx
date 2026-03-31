@@ -21,8 +21,9 @@ export default function HomeAboutSection() {
   };
 
   return (
-    <section className="bg-white py-10">
-      <div className="mx-auto max-w-6xl px-6 grid lg:grid-cols-2 gap-10 items-center">
+    <section className="py-10">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid lg:grid-cols-2 gap-10 items-center rounded-3xl bg-white/90 backdrop-blur-md ring-1 ring-black/5 p-6 lg:p-10">
         {/* Images */}
         <motion.div
           initial="hidden"
@@ -150,6 +151,7 @@ export default function HomeAboutSection() {
             </InteractiveButton>
           </motion.div>
         </motion.div>
+      </div>
       </div>
     </section>
   );
