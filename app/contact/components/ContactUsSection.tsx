@@ -173,10 +173,34 @@ export function ContactUsSection() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-10 flex justify-center"
         >
-          <div className="w-full max-w-3xl border border-blue-400 text-blue-600 rounded-lg py-3 px-4 text-sm md:text-base bg-white text-center hover:bg-blue-50 transition">
-            Available 24/7 : We're here to support your logistics needs around
-            the clock.
-          </div>
+          <motion.div
+            whileHover={{ scale: 1.04, y: -2 }}
+            className="relative w-full max-w-3xl rounded-full p-[2px] overflow-hidden"
+          >
+            {/* 🔥 Animated Border */}
+            <span
+              className="absolute inset-0 rounded-full animate-[spin_3s_linear_infinite] blur-[6px] opacity-80"
+              style={{
+                background:
+                  "conic-gradient(from 0deg, #ff0000, #ffff00, #ff0000)",
+              }}
+            ></span>
+
+            {/* 🔥 Inner Glass Layer */}
+            <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md"></span>
+
+            {/* 🔥 Content */}
+            <div
+              className="relative z-10 rounded-full bg-white px-6 py-3 text-sm md:text-base text-blue-600 text-center font-medium transition-all duration-300
+    shadow-[0_10px_25px_rgba(0,0,0,0.4),0_0_20px_rgba(52,116,244,0.4)]"
+            >
+              Available 24/7 : We're here to support your logistics needs around
+              the clock.
+            </div>
+
+            {/* 🔥 Shine Effect */}
+            <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40"></span>
+          </motion.div>
         </motion.div>
       </div>
     </section>

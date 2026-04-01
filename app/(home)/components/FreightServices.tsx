@@ -136,36 +136,38 @@ export function FreightServices() {
             href="/contact"
             whileHover={{ scale: 1.08, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className="relative inline-block rounded-md p-[2px] overflow-hidden"
+            className="relative inline-block rounded-full p-[2px] overflow-hidden"
           >
-            {/* Animated Border */}
+            {/* 🔥 Animated Border Glow */}
             <span
-              className="absolute inset-0 rounded-md animate-[spin_3s_linear_infinite] blur-[3px]"
+              className="absolute inset-0 rounded-full animate-[spin_3s_linear_infinite] blur-[6px] opacity-80"
               style={{
                 background:
                   "conic-gradient(from 0deg, #ff0000, #ffff00, #ff0000)",
               }}
             ></span>
 
-            {/* Inner dark layer for contrast */}
-            <span className="absolute inset-[2px] rounded-md bg-black/80 backdrop-blur-sm"></span>
+            {/* 🔥 Inner dark glass layer */}
+            <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md"></span>
 
-            {/* Button Content */}
-            <span className="relative z-10 flex items-center gap-2 rounded-md bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),0_8px_20px_rgba(0,0,0,0.4)] transition-all duration-300">
-              {/* Text */}
+            {/* 🔥 Button Content */}
+            <span
+              className="relative z-10 flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3 font-medium text-white hover:bg-blue-700 transition-all duration-300
+    shadow-[0_10px_25px_rgba(0,0,0,0.4),0_0_20px_rgba(255,0,0,0.4)]"
+            >
               Get a Freight Quote
-              {/* Animated Arrow */}
+              {/* Arrow */}
               <motion.span
                 className="inline-block"
-                whileHover={{ x: 5 }}
+                whileHover={{ x: 6 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 →
               </motion.span>
             </span>
 
-            {/* Top light shine */}
-            <span className="pointer-events-none absolute inset-0 rounded-md bg-gradient-to-b from-white/20 to-transparent opacity-40"></span>
+            {/* 🔥 Top Shine Effect */}
+            <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40"></span>
           </MotionLink>
         </motion.div>
       </div>

@@ -169,11 +169,17 @@ export function QuoteFormSection() {
             className="mt-3 text-base text-[#555555] sm:text-lg"
             variants={headerSub}
           >
-            Need reliable freight transportation? Contact our team for a fast and competitive quote.
+            Need reliable freight transportation? Contact our team for a fast
+            and competitive quote.
           </motion.p>
         </motion.div>
 
-        <motion.div variants={cardShell} initial="hidden" whileInView="visible" viewport={viewport}>
+        <motion.div
+          variants={cardShell}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
           <div className="rounded-2xl bg-gradient-to-br from-[#3474F4]/55 via-[#5AA8FF]/55 to-[#1E40AF]/55 p-[2px] shadow-[0_0_0_1px_rgba(52,116,244,0.10),0_0_45px_rgba(52,116,244,0.18),0_18px_40px_rgba(15,23,42,0.10)]">
             <div className="rounded-2xl bg-white/90 p-6 backdrop-blur-[2px] sm:p-8 md:p-10">
               <motion.form
@@ -184,175 +190,214 @@ export function QuoteFormSection() {
                 whileInView="visible"
                 viewport={viewport}
               >
-            <motion.div className="grid gap-6 sm:grid-cols-2" variants={formRow}>
-              <motion.div className="space-y-2" variants={fieldPair}>
-                <motion.label
-                  htmlFor="fullName"
-                  className="block text-sm font-semibold text-[#333333]"
-                  variants={fieldLabel}
+                <motion.div
+                  className="grid gap-6 sm:grid-cols-2"
+                  variants={formRow}
                 >
-                  Full Name
-                </motion.label>
-                <motion.input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  placeholder="John Deo"
-                  required
-                  className={inputClassName}
-                  variants={fieldControl}
-                />
-              </motion.div>
-              <motion.div className="space-y-2" variants={fieldPair}>
-                <motion.label
-                  htmlFor="email"
-                  className="block text-sm font-semibold text-[#333333]"
-                  variants={fieldLabel}
-                >
-                  Email
-                </motion.label>
-                <motion.input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="jenn@calcoast.com"
-                  required
-                  className={inputClassName}
-                  variants={fieldControl}
-                />
-              </motion.div>
-            </motion.div>
-
-            <motion.div className="grid gap-6 sm:grid-cols-2" variants={formRow}>
-              <motion.div className="space-y-2" variants={fieldPair}>
-                <motion.label
-                  htmlFor="phone"
-                  className="block text-sm font-semibold text-[#333333]"
-                  variants={fieldLabel}
-                >
-                  Phone
-                </motion.label>
-                <motion.input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="(555) 000-0000"
-                  className={inputClassName}
-                  variants={fieldControl}
-                />
-              </motion.div>
-              <motion.div className="space-y-2" variants={fieldPair}>
-                <motion.label
-                  htmlFor="freightType"
-                  className="block text-sm font-semibold text-[#333333]"
-                  variants={fieldLabel}
-                >
-                  Freight Type
-                </motion.label>
-                <motion.div className="relative" variants={fieldControl}>
-                  <motion.select
-                    id="freightType"
-                    name="freightType"
-                    className={selectClassName}
-                  >
-                    <option value="">Select type...</option>
-                    {freightTypes.map((type) => (
-                      <option key={type} value={type}>
-                        {type}
-                      </option>
-                    ))}
-                  </motion.select>
-                  <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-                    <motion.svg
-                      className="h-4 w-4 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      aria-hidden
-                      initial={{ opacity: 0, y: -4 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={viewport}
-                      transition={{ delay: 0.15, duration: 0.35, ease: easeOut }}
+                  <motion.div className="space-y-2" variants={fieldPair}>
+                    <motion.label
+                      htmlFor="fullName"
+                      className="block text-sm font-semibold text-[#333333]"
+                      variants={fieldLabel}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 9l6 6 6-6"
-                      />
-                    </motion.svg>
-                  </div>
+                      Full Name
+                    </motion.label>
+                    <motion.input
+                      id="fullName"
+                      name="fullName"
+                      type="text"
+                      placeholder="John Deo"
+                      required
+                      className={inputClassName}
+                      variants={fieldControl}
+                    />
+                  </motion.div>
+                  <motion.div className="space-y-2" variants={fieldPair}>
+                    <motion.label
+                      htmlFor="email"
+                      className="block text-sm font-semibold text-[#333333]"
+                      variants={fieldLabel}
+                    >
+                      Email
+                    </motion.label>
+                    <motion.input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="jenn@calcoast.com"
+                      required
+                      className={inputClassName}
+                      variants={fieldControl}
+                    />
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            </motion.div>
 
-            <motion.div className="grid gap-6 sm:grid-cols-2" variants={formRow}>
-              <motion.div className="space-y-2" variants={fieldPair}>
-                <motion.label
-                  htmlFor="origin"
-                  className="block text-sm font-semibold text-[#333333]"
-                  variants={fieldLabel}
+                <motion.div
+                  className="grid gap-6 sm:grid-cols-2"
+                  variants={formRow}
                 >
-                  Origin
-                </motion.label>
-                <motion.input
-                  id="origin"
-                  name="origin"
-                  type="text"
-                  placeholder="Fresno, CA"
-                  className={inputClassName}
-                  variants={fieldControl}
-                />
-              </motion.div>
-              <motion.div className="space-y-2" variants={fieldPair}>
-                <motion.label
-                  htmlFor="destination"
-                  className="block text-sm font-semibold text-[#333333]"
-                  variants={fieldLabel}
-                >
-                  Destination
-                </motion.label>
-                <motion.input
-                  id="destination"
-                  name="destination"
-                  type="text"
-                  placeholder="Chicago, IL"
-                  className={inputClassName}
-                  variants={fieldControl}
-                />
-              </motion.div>
-            </motion.div>
+                  <motion.div className="space-y-2" variants={fieldPair}>
+                    <motion.label
+                      htmlFor="phone"
+                      className="block text-sm font-semibold text-[#333333]"
+                      variants={fieldLabel}
+                    >
+                      Phone
+                    </motion.label>
+                    <motion.input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      placeholder="(555) 000-0000"
+                      className={inputClassName}
+                      variants={fieldControl}
+                    />
+                  </motion.div>
+                  <motion.div className="space-y-2" variants={fieldPair}>
+                    <motion.label
+                      htmlFor="freightType"
+                      className="block text-sm font-semibold text-[#333333]"
+                      variants={fieldLabel}
+                    >
+                      Freight Type
+                    </motion.label>
+                    <motion.div className="relative" variants={fieldControl}>
+                      <motion.select
+                        id="freightType"
+                        name="freightType"
+                        className={selectClassName}
+                      >
+                        <option value="">Select type...</option>
+                        {freightTypes.map((type) => (
+                          <option key={type} value={type}>
+                            {type}
+                          </option>
+                        ))}
+                      </motion.select>
+                      <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                        <motion.svg
+                          className="h-4 w-4 text-gray-400"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                          aria-hidden
+                          initial={{ opacity: 0, y: -4 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={viewport}
+                          transition={{
+                            delay: 0.15,
+                            duration: 0.35,
+                            ease: easeOut,
+                          }}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 9l6 6 6-6"
+                          />
+                        </motion.svg>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
 
-            <motion.div className="space-y-2" variants={formRow}>
-              <motion.div variants={fieldPair}>
-                <motion.label
-                  htmlFor="details"
-                  className="block text-sm font-semibold text-[#333333]"
-                  variants={fieldLabel}
+                <motion.div
+                  className="grid gap-6 sm:grid-cols-2"
+                  variants={formRow}
                 >
-                  Additional Details
-                </motion.label>
-                <motion.textarea
-                  id="details"
-                  name="details"
-                  rows={4}
-                  placeholder="Tell us about your shipment..."
-                  className={`${inputClassName} resize-y`}
-                  variants={fieldControl}
-                />
-              </motion.div>
-            </motion.div>
+                  <motion.div className="space-y-2" variants={fieldPair}>
+                    <motion.label
+                      htmlFor="origin"
+                      className="block text-sm font-semibold text-[#333333]"
+                      variants={fieldLabel}
+                    >
+                      Origin
+                    </motion.label>
+                    <motion.input
+                      id="origin"
+                      name="origin"
+                      type="text"
+                      placeholder="Fresno, CA"
+                      className={inputClassName}
+                      variants={fieldControl}
+                    />
+                  </motion.div>
+                  <motion.div className="space-y-2" variants={fieldPair}>
+                    <motion.label
+                      htmlFor="destination"
+                      className="block text-sm font-semibold text-[#333333]"
+                      variants={fieldLabel}
+                    >
+                      Destination
+                    </motion.label>
+                    <motion.input
+                      id="destination"
+                      name="destination"
+                      type="text"
+                      placeholder="Chicago, IL"
+                      className={inputClassName}
+                      variants={fieldControl}
+                    />
+                  </motion.div>
+                </motion.div>
 
-                <motion.div variants={submitBtn}>
-                  <motion.button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full rounded-lg bg-[#3474F4] px-6 py-4 text-base font-semibold text-white shadow-[0_0_0_1px_rgba(255,255,255,0.15)_inset,0_12px_24px_rgba(52,116,244,0.22),0_18px_34px_rgba(15,23,42,0.14)] transition-[background-color,box-shadow,transform] hover:bg-[#2F6AF0] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.18)_inset,0_0_32px_rgba(52,116,244,0.28),0_20px_40px_rgba(15,23,42,0.16)] disabled:opacity-70"
-                    whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                    whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                <motion.div className="space-y-2" variants={formRow}>
+                  <motion.div variants={fieldPair}>
+                    <motion.label
+                      htmlFor="details"
+                      className="block text-sm font-semibold text-[#333333]"
+                      variants={fieldLabel}
+                    >
+                      Additional Details
+                    </motion.label>
+                    <motion.textarea
+                      id="details"
+                      name="details"
+                      rows={4}
+                      placeholder="Tell us about your shipment..."
+                      className={`${inputClassName} resize-y`}
+                      variants={fieldControl}
+                    />
+                  </motion.div>
+                </motion.div>
+
+                <motion.div variants={submitBtn} className="w-full">
+                  <motion.div
+                    whileHover={{
+                      scale: isSubmitting ? 1 : 1.06,
+                      y: isSubmitting ? 0 : -2,
+                    }}
+                    whileTap={{ scale: isSubmitting ? 1 : 0.96 }}
+                    className="relative inline-block w-full rounded-full p-[2px] overflow-hidden"
                   >
-                    {isSubmitting ? "Submitting..." : "Request a Quote"}
-                  </motion.button>
+                    {/* 🔥 Animated Border */}
+                    <span
+                      className="absolute inset-0 rounded-full animate-[spin_3s_linear_infinite] blur-[6px] opacity-80"
+                      style={{
+                        background:
+                          "conic-gradient(from 0deg, #ff0000, #ffff00, #ff0000)",
+                      }}
+                    ></span>
+
+                    {/* 🔥 Inner Glass Layer */}
+                    <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md"></span>
+
+                    {/* 🔥 Button */}
+                    <motion.button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="relative z-10 w-full rounded-full bg-[#3474F4] px-6 py-4 text-base font-semibold text-white transition-all duration-300
+      hover:bg-[#2F6AF0]
+      shadow-[0_10px_25px_rgba(0,0,0,0.4),0_0_25px_rgba(52,116,244,0.5)]
+      disabled:opacity-70 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? "Submitting..." : "Request a Quote"}
+                    </motion.button>
+
+                    {/* 🔥 Shine Effect */}
+                    <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40"></span>
+                  </motion.div>
                 </motion.div>
               </motion.form>
             </div>

@@ -11,7 +11,6 @@ import { useScrollState } from "../../components/ScrollContext";
 import mainImage from "@/app/assets/frame779.png";
 import overlayImage from "@/app/assets/frame781.png";
 import mobileImage from "@/app/assets/frame782.png";
-import InteractiveButton from "@/app/Animations/InteractiveButton";
 
 const features = ["On Time Delivery", "35+ Assets", "Interstate Authority"];
 
@@ -48,7 +47,7 @@ export function Hero() {
   const currentWord = words[loopNum % words.length];
   const longestWord = words.reduce(
     (longest, w) => (w.length > longest.length ? w : longest),
-    ""
+    "",
   );
 
   // Handle typing effect
@@ -143,9 +142,8 @@ export function Hero() {
                 initial={{ x: particle.x, y: -20 }}
                 animate={{
                   y:
-                    (typeof window !== "undefined"
-                      ? window.innerHeight
-                      : 800) + 100,
+                    (typeof window !== "undefined" ? window.innerHeight : 800) +
+                    100,
                   opacity: [0, 1, 0],
                 }}
                 transition={{
@@ -415,13 +413,46 @@ export function Hero() {
                 proven track record of reliability and on time performance.
               </motion.p>
 
-              <motion.div variants={fadeUpAbout}>
-                <InteractiveButton
-                  className="w-full lg:w-auto px-6 py-3"
+              <motion.div
+                variants={fadeUpAbout}
+                className="flex justify-center lg:justify-start"
+              >
+                <motion.button
                   onClick={() => router.push("/services")}
+                  whileHover={{ scale: 1.08, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative inline-block rounded-full p-[2px] overflow-hidden w-full lg:w-auto"
                 >
-                  Explore Our Services
-                </InteractiveButton>
+                  {/* 🔥 Animated Border */}
+                  <span
+                    className="absolute inset-0 rounded-full animate-[spin_3s_linear_infinite] blur-[6px] opacity-80"
+                    style={{
+                      background:
+                        "conic-gradient(from 0deg, #ff0000, #ffff00, #ff0000)",
+                    }}
+                  ></span>
+
+                  {/* 🔥 Inner Glass Layer */}
+                  <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md"></span>
+
+                  {/* 🔥 Button Content */}
+                  <span
+                    className="relative z-10 flex items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700 transition-all duration-300
+    shadow-[0_10px_25px_rgba(0,0,0,0.4),0_0_20px_rgba(255,0,0,0.4)]"
+                  >
+                    Explore Our Services
+                    {/* Arrow */}
+                    <motion.span
+                      whileHover={{ x: 6 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      →
+                    </motion.span>
+                  </span>
+
+                  {/* 🔥 Shine Effect */}
+                  <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40"></span>
+                </motion.button>
               </motion.div>
             </motion.div>
           </div>
