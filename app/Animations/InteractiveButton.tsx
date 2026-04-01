@@ -33,8 +33,8 @@ export default function InteractiveButton({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       whileTap={{ scale: 0.95 }}
-      className={`relative overflow-hidden rounded-xl ${className} 
-                  bg-gradient-to-r from-blue-500 to-indigo-600 
+      className={`relative overflow-hidden rounded-xl ${className}
+                  bg-gradient-to-r from-blue-500 to-indigo-600
                   text-white font-bold px-6 py-3 shadow-xl hover:shadow-2xl`}
     >
       {/* Button Text */}

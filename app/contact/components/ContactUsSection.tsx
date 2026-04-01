@@ -1,101 +1,15 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
-import type { ComponentType, SVGProps } from "react";
-
-const easeOut = [0.22, 1, 0.36, 1] as const;
-
-const viewport = { once: true, margin: "-60px" };
-
-const sectionBg = {
-  background:
-    "linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(52, 116, 244, 0.2) 100%), #f0f4f8",
-};
-
-const gridContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.14, delayChildren: 0.06 },
-  },
-};
-
-const cardOuter: Variants = {
-  hidden: { opacity: 0, y: 28, rotateY: -6 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    rotateY: 0,
-    transition: {
-      duration: 0.55,
-      ease: easeOut,
-      staggerChildren: 0.1,
-      delayChildren: 0.05,
-    },
-  },
-};
-
-const cardIconWrap: Variants = {
-  hidden: { opacity: 0, scale: 0.6, rotate: -12 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    rotate: 0,
-    transition: { type: "spring", stiffness: 320, damping: 22 },
-  },
-};
-
-const cardTitle: Variants = {
-  hidden: { opacity: 0, x: -12 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.4, ease: easeOut },
-  },
-};
-
-const cardDesc: Variants = {
-  hidden: { opacity: 0, y: 8 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.38, ease: easeOut },
-  },
-};
-
-const cardDetail: Variants = {
-  hidden: { opacity: 0, y: 10, scale: 0.97 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.4, ease: easeOut },
-  },
-};
-
-const bannerCard: Variants = {
-  hidden: { opacity: 0, y: 16, scale: 0.96 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: easeOut, staggerChildren: 0.12 },
-  },
-};
-
-const bannerText: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { duration: 0.5, ease: easeOut },
-  },
-};
+import Image from "next/image";
+import type { SVGProps } from "react";
+import hqImage from "@/app/assets/contact.png";
+import { motion } from "framer-motion";
 
 function IconPhone(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      width="20"
-      height="20"
+      width="24"
+      height="24"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -114,8 +28,8 @@ function IconPhone(props: SVGProps<SVGSVGElement>) {
 function IconEmail(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      width="20"
-      height="20"
+      width="24"
+      height="24"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -131,139 +45,140 @@ function IconEmail(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-function IconPin(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      width="20"
-      height="20"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-      {...props}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-      />
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-      />
-    </svg>
-  );
-}
-
-const contactCards: {
-  title: string;
-  description: string;
-  detail: string;
-  href: string;
-  Icon: ComponentType<SVGProps<SVGSVGElement>>;
-}[] = [
-  {
-    title: "Call Us",
-    description: "Speak with our team directly",
-    detail: "(559) 481 6441",
-    href: "tel:+15594816441",
-    Icon: IconPhone,
-  },
-  {
-    title: "Email Us",
-    description: "We'll respond within 24 hours",
-    detail: "ops@calcoastlogistics.com",
-    href: "mailto:ops@calcoastlogistics.com",
-    Icon: IconEmail,
-  },
-  {
-    title: "Visit Us",
-    description: "View on Google Maps",
-    detail: "Open in Maps",
-    href: "https://maps.google.com/?q=2205+E+Annadale+Ave,+Fresno,+CA+93706",
-    Icon: IconPin,
-  },
-];
-
 export function ContactUsSection() {
   return (
-    <motion.section
-      className="px-4 py-16 sm:px-6 sm:py-20 lg:px-8"
-      style={sectionBg}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={viewport}
-      transition={{ duration: 0.45, ease: easeOut }}
-    >
-      <div className="mx-auto max-w-6xl">
+    <section className="bg-gradient-to-b from-[#e6efff] to-[#eef3f8] px-4 py-16 md:py-20">
+      <div className="max-w-6xl mx-auto">
+        {/* 🔥 TOP TEXT */}
         <motion.div
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          variants={gridContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
         >
-          {contactCards.map((card) => (
-            <motion.a
-              key={card.title}
-              href={card.href}
-              target={card.href.startsWith("http") ? "_blank" : undefined}
-              rel={
-                card.href.startsWith("http") ? "noopener noreferrer" : undefined
-              }
-              className="group flex flex-col rounded-2xl border-2 border-[#3474F4] bg-white p-6 text-black transition-colors duration-300 hover:border-transparent hover:bg-[#020840] hover:text-white"
-              variants={cardOuter}
-              whileHover={{ scale: 1.02, y: -4 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              style={{ transformStyle: "preserve-3d" }}
-            >
-              <motion.span
-                className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gray-200 text-[#020840] transition-colors duration-300 group-hover:bg-white/20 group-hover:text-white"
-                variants={cardIconWrap}
-              >
-                <card.Icon className="h-5 w-5" aria-hidden />
-              </motion.span>
-              <motion.h3
-                className="text-lg font-bold sm:text-xl"
-                variants={cardTitle}
-              >
-                {card.title}
-              </motion.h3>
-              <motion.p
-                className="mt-1 text-sm text-gray-600 transition-colors duration-300 group-hover:text-white/90"
-                variants={cardDesc}
-              >
-                {card.description}
-              </motion.p>
-              <motion.p
-                className="mt-3 text-base font-bold sm:text-lg"
-                variants={cardDetail}
-              >
-                {card.detail}
-              </motion.p>
-            </motion.a>
-          ))}
+          <p className="text-blue-500 text-sm font-medium">Get In Touch</p>
+          <h2 className="text-3xl md:text-4xl font-bold mt-1">Contact Us</h2>
+          <p className="text-gray-500 mt-3 text-base max-w-md mx-auto">
+            We're here to answer your questions and support your logistics
+            needs.
+          </p>
         </motion.div>
 
-        <div className="mt-10 flex justify-center">
+        {/* 🔥 MAIN GRID (same gap-6 as before) */}
+        <div className="grid gap-6 mt-12 lg:grid-cols-2 items-stretch">
+          {/* ✅ LEFT IMAGE (bada kiya) */}
           <motion.div
-            className="w-full max-w-2xl rounded-2xl border-2 border-[#3474F4] bg-white px-6 py-4 text-center"
-            variants={bannerCard}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative w-full rounded-2xl overflow-hidden h-[340px] sm:h-[380px] lg:h-[400px] shadow-lg"
           >
-            <motion.p
-              className="text-base font-medium text-[#3474F4] sm:text-lg"
-              variants={bannerText}
-            >
-              Available 24/7 : We&apos;re here to support your logistics needs
-              around the clock.
-            </motion.p>
+            <Image
+              src={hqImage}
+              alt="Headquarters"
+              fill
+              className="object-cover"
+              priority
+            />
+
+            {/* overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-between p-6 text-white">
+              <div>
+                <h3 className="text-lg font-semibold">Headquarters</h3>
+                <p className="text-sm opacity-90">Fresno, California</p>
+              </div>
+
+              <div className="text-sm">
+                <p>
+                  2205 E Annadale Ave,
+                  <br />
+                  Fresno, CA 93706
+                </p>
+                <p className="mt-2 underline cursor-pointer hover:text-blue-300 transition">
+                  View on Maps →
+                </p>
+              </div>
+            </div>
           </motion.div>
+
+          {/* ✅ RIGHT SIDE (cards bhi bade kiye) */}
+          <div className="flex flex-col gap-6 h-full">
+            {/* CALL CARD */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ scale: 1.02 }}
+              className="group flex-1 rounded-2xl bg-white border border-gray-200 p-8 flex items-center gap-5 hover:bg-[#0b1fae] hover:border-[#0b1fae] transition-all duration-300 shadow-md hover:shadow-lg"
+            >
+              <motion.div
+                whileHover={{ rotate: 15 }}
+                className="bg-gray-100 p-4 rounded-full group-hover:bg-white/20 transition"
+              >
+                <IconPhone className="text-[#0b1fae] group-hover:text-white" />
+              </motion.div>
+
+              <div>
+                <h3 className="font-semibold text-lg text-gray-900 group-hover:text-white">
+                  Call Us
+                </h3>
+                <p className="text-sm text-gray-600 group-hover:text-white/90">
+                  Speak with our team directly
+                </p>
+                <p className="font-bold text-lg text-[#0b1fae] group-hover:text-white mt-1">
+                  (559) 481 6441
+                </p>
+              </div>
+            </motion.div>
+
+            {/* EMAIL CARD */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ scale: 1.02 }}
+              className="group flex-1 rounded-2xl bg-white border border-gray-200 p-8 flex items-center gap-5 hover:bg-[#0b1fae] hover:border-[#0b1fae] transition-all duration-300 shadow-md hover:shadow-lg"
+            >
+              <motion.div
+                whileHover={{ rotate: -15 }}
+                className="bg-gray-100 p-4 rounded-full group-hover:bg-white/20 transition"
+              >
+                <IconEmail className="text-[#0b1fae] group-hover:text-white" />
+              </motion.div>
+
+              <div>
+                <h3 className="font-semibold text-lg text-gray-900 group-hover:text-white">
+                  Email Us
+                </h3>
+                <p className="text-sm text-gray-600 group-hover:text-white/90">
+                  We'll respond within 24 hours
+                </p>
+                <p className="font-semibold text-[#0b1fae] group-hover:text-white mt-1">
+                  ops@calcoastlogistics.com
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
+
+        {/* 🔥 BOTTOM BANNER */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-10 flex justify-center"
+        >
+          <div className="w-full max-w-3xl border border-blue-400 text-blue-600 rounded-lg py-3 px-4 text-sm md:text-base bg-white text-center hover:bg-blue-50 transition">
+            Available 24/7 : We're here to support your logistics needs around
+            the clock.
+          </div>
+        </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }
