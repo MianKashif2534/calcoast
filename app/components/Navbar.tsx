@@ -13,7 +13,7 @@ const navLinks = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Why Us", href: "/why-us" },
-  { label: "Reviews", href: "/#reviews" },
+  { label: "Driver", href: "https://intelliapp.driverapponline.com/c/calcoastlogistics " },
   { label: "Contact", href: "/contact" },
 ];
 
