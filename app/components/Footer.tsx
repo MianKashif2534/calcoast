@@ -159,6 +159,55 @@ function IconMail(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+function IconInstagram(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} {...props}>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M7 3h10a4 4 0 014 4v10a4 4 0 01-4 4H7a4 4 0 01-4-4V7a4 4 0 014-4z"
+      />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 17a5 5 0 100-10 5 5 0 000 10z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17.5 6.5h.01" />
+    </svg>
+  );
+}
+
+function IconFacebook(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M13.5 22v-8h2.7l.4-3H13.5V9.1c0-.9.2-1.6 1.6-1.6H16.7V4.8c-.3 0-1.4-.1-2.8-.1-2.7 0-4.6 1.6-4.6 4.7V11H6.7v3h2.6v8h4.2z" />
+    </svg>
+  );
+}
+
+function IconTikTok(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M16.6 6.2c-.9-1-1.4-2.3-1.4-3.7h-3.3v13.1c0 1.3-1 2.4-2.4 2.4-1.3 0-2.4-1-2.4-2.4 0-1.3 1-2.4 2.4-2.4.3 0 .6.1.9.2V9.1c-.3 0-.6-.1-.9-.1-3.1 0-5.6 2.5-5.6 5.6S6.8 20.2 9.9 20.2c3.1 0 5.6-2.5 5.6-5.6V9.1c1.1.8 2.5 1.3 4 1.3V7.2c-1.1 0-2.1-.4-2.9-1z" />
+    </svg>
+  );
+}
+
+function IconX(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M18.9 2H22l-6.8 7.8L23.5 22h-6.6l-5.2-6.6L5.9 22H2.8l7.4-8.5L1 2h6.8l4.7 6L18.9 2zm-1.2 18h1.7L7.7 3.9H5.9L17.7 20z" />
+    </svg>
+  );
+}
+
+const socialLinks: {
+  label: string;
+  href: string;
+  Icon: ComponentType<SVGProps<SVGSVGElement>>;
+}[] = [
+  { label: "Instagram", href: "https://instagram.com", Icon: IconInstagram },
+  { label: "Facebook", href: "https://facebook.com", Icon: IconFacebook },
+  { label: "TikTok", href: "https://tiktok.com", Icon: IconTikTok },
+  { label: "X", href: "https://x.com", Icon: IconX },
+];
+
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
@@ -230,9 +279,28 @@ export function Footer() {
             >
               Active interstate freight carrier specializing in general freight, fresh produce, and full truckload transport. Serving nationwide from Fresno, California.
             </motion.p>
-            <motion.p className="text-xs text-white/70" variants={fmcsaLine}>
-              FMCSA Common Authority · Since November 2015
-            </motion.p>
+
+            <motion.div
+              className="inline-flex items-center justify-center md:justify-start"
+              variants={bodyText}
+            >
+              <div className="inline-flex items-center gap-2 rounded-full border-7 border-[#3474F4] bg-white px-4 py-1.5">
+                {socialLinks.map((item) => (
+                  <motion.a
+                    key={item.label}
+                    href={item.href}
+                    aria-label={item.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ y: -2, scale: 1.06 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 28 }}
+                    className="grid h-8 w-8 place-items-center rounded-full bg-white hover:bg-[#3474F4] text-[#3474F4] transition-all duration-300 hover:text-white shadow-sm  hover:ring-[#3474F4]/60"
+                  >
+                    <item.Icon className="h-5 w-5" aria-hidden />
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
 
           <motion.div

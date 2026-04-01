@@ -46,6 +46,10 @@ export function Hero() {
   ];
 
   const currentWord = words[loopNum % words.length];
+  const longestWord = words.reduce(
+    (longest, w) => (w.length > longest.length ? w : longest),
+    ""
+  );
 
   // Handle typing effect
   useEffect(() => {
@@ -163,7 +167,7 @@ export function Hero() {
             variants={container}
             initial="hidden"
             animate="show"
-            className="flex w-full max-w-3xl flex-col items-center gap-6 text-center"
+            className="flex w-full max-w-3xl flex-col items-center gap-2 md:gap-6 text-center mt-6"
           >
             {/* Animated Badge */}
             <motion.div variants={fadeUp} className="relative">
@@ -185,16 +189,22 @@ export function Hero() {
             </motion.div>
 
             {/* Typing Effect Heading */}
-            <motion.div variants={fadeUp} className="space-y-4">
+            <motion.div variants={fadeUp} className="space-y-1">
               <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-                <span className="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-                  {typedText || words[0]}
+                <span className="relative inline-block align-top">
+                  {/* Reserve height (prevents jump on wrap/line changes) */}
+                  <span className="invisible block bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                    {longestWord}
+                  </span>
+                  <span className="absolute inset-0 inline-flex items-end bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                    <span>{typedText || words[0]}</span>
+                    <motion.span
+                      animate={{ opacity: [1, 0, 1] }}
+                      transition={{ duration: 0.8, repeat: Infinity }}
+                      className="inline-block w-1 h-[1em] ml-1 bg-blue-500"
+                    />
+                  </span>
                 </span>
-                <motion.span
-                  animate={{ opacity: [1, 0, 1] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
-                  className="inline-block w-1 h-8 ml-1 bg-blue-500"
-                />
               </div>
               <motion.p
                 variants={fadeUp}

@@ -161,7 +161,6 @@ const contactCards: {
   description: string;
   detail: string;
   href: string;
-  dark: boolean;
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
 }[] = [
   {
@@ -169,7 +168,6 @@ const contactCards: {
     description: "Speak with our team directly",
     detail: "(559) 481 6441",
     href: "tel:+15594816441",
-    dark: true,
     Icon: IconPhone,
   },
   {
@@ -177,7 +175,6 @@ const contactCards: {
     description: "We'll respond within 24 hours",
     detail: "ops@calcoastlogistics.com",
     href: "mailto:ops@calcoastlogistics.com",
-    dark: false,
     Icon: IconEmail,
   },
   {
@@ -185,7 +182,6 @@ const contactCards: {
     description: "View on Google Maps",
     detail: "Open in Maps",
     href: "https://maps.google.com/?q=2205+E+Annadale+Ave,+Fresno,+CA+93706",
-    dark: false,
     Icon: IconPin,
   },
 ];
@@ -216,22 +212,14 @@ export function ContactUsSection() {
               rel={
                 card.href.startsWith("http") ? "noopener noreferrer" : undefined
               }
-              className={`flex flex-col rounded-2xl p-6 ${
-                card.dark
-                  ? "bg-[#020840] text-white"
-                  : "border-2 border-[#3474F4] bg-white text-black"
-              }`}
+              className="group flex flex-col rounded-2xl border-2 border-[#3474F4] bg-white p-6 text-black transition-colors duration-300 hover:border-transparent hover:bg-[#020840] hover:text-white"
               variants={cardOuter}
               whileHover={{ scale: 1.02, y: -4 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
               style={{ transformStyle: "preserve-3d" }}
             >
               <motion.span
-                className={`mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${
-                  card.dark
-                    ? "bg-white/20 text-white"
-                    : "bg-gray-200 text-[#020840]"
-                }`}
+                className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gray-200 text-[#020840] transition-colors duration-300 group-hover:bg-white/20 group-hover:text-white"
                 variants={cardIconWrap}
               >
                 <card.Icon className="h-5 w-5" aria-hidden />
@@ -243,7 +231,7 @@ export function ContactUsSection() {
                 {card.title}
               </motion.h3>
               <motion.p
-                className={`mt-1 text-sm ${card.dark ? "text-white/90" : "text-gray-600"}`}
+                className="mt-1 text-sm text-gray-600 transition-colors duration-300 group-hover:text-white/90"
                 variants={cardDesc}
               >
                 {card.description}
