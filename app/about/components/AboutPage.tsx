@@ -1,5 +1,5 @@
 import { PageHero } from "@/app/components/PageHero";
-import aboutHero from "@/app/assets/Abouthero-truck.png";
+import aboutHero from "@/app/assets/about.png";
 
 export function AboutPage() {
   return (
@@ -8,7 +8,7 @@ export function AboutPage() {
         subtitle="About Us"
         title="About Cal Coast Logistics"
         description="Fresno's trusted freight partner delivering reliability, safety, and excellence across the nation since 2015."
-        image={aboutHero} // 👈 yaha add karo
+        image={aboutHero}
       />
 
       <main className="mx-auto max-w-7xl px-4">

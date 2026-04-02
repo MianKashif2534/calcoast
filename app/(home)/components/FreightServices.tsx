@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import serviceproduce1 from "@/app/assets/service-produce1.png";
-import serviceproduce2 from "@/app/assets/service-produce2.png";
+import serviceproduce2 from "@/app/assets/service-produce3.png";
 import frame749 from "@/app/assets/frame749.png";
 
 const MotionLink = motion.create(Link);
@@ -38,7 +38,7 @@ export function FreightServices() {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="relative rounded-xl overflow-hidden mb-6 group"
+          className="relative rounded-xl overflow-hidden mb-6 group border-3 border-blue-500 hover:border-blue-600 transition"
         >
           <Image
             src={frame749}
@@ -50,7 +50,7 @@ export function FreightServices() {
 
           <div className="absolute inset-0 bg-black/40 flex items-end p-6">
             <div className="text-white max-w-md">
-              <span className="text-white bg-[#031595]/30 px-3 py-1 rounded-full text-sm">
+              <span className="bg-[#031595]/30 px-3 py-1 rounded-full text-sm">
                 Core Service
               </span>
               <h3 className="text-xl font-semibold mt-2">General Freight</h3>
@@ -70,7 +70,7 @@ export function FreightServices() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="flex flex-col md:flex-row rounded-xl overflow-hidden bg-[#1E1442] group"
+            className="flex flex-col md:flex-row rounded-xl overflow-hidden bg-[#1E1442] group border-3 border-blue-500 hover:border-blue-500 transition hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]"
           >
             <div className="md:w-1/2 overflow-hidden">
               <Image
@@ -100,7 +100,7 @@ export function FreightServices() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="flex flex-col md:flex-row rounded-xl overflow-hidden bg-[#1E1442] group"
+            className="flex flex-col md:flex-row rounded-xl overflow-hidden bg-[#1E1442] group border-3 border-blue-500 hover:border-blue-500 transition hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]"
           >
             <div className="md:w-1/2 overflow-hidden">
               <Image
@@ -125,7 +125,7 @@ export function FreightServices() {
           </motion.div>
         </div>
 
-        {/* Button */}
+        {/* Button (unchanged) */}
         <motion.div
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -138,7 +138,6 @@ export function FreightServices() {
             whileTap={{ scale: 0.95 }}
             className="relative inline-block rounded-full p-[2px] overflow-hidden"
           >
-            {/* 🔥 Animated Border Glow */}
             <span
               className="absolute inset-0 rounded-full animate-[spin_3s_linear_infinite] blur-[6px] opacity-80"
               style={{
@@ -147,27 +146,12 @@ export function FreightServices() {
               }}
             ></span>
 
-            {/* 🔥 Inner dark glass layer */}
             <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md"></span>
 
-            {/* 🔥 Button Content */}
-            <span
-              className="relative z-10 flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3 font-medium text-white hover:bg-blue-700 transition-all duration-300
-    shadow-[0_10px_25px_rgba(0,0,0,0.4),0_0_20px_rgba(255,0,0,0.4)]"
-            >
+            <span className="relative z-10 flex items-center gap-2 rounded-full bg-blue-600 px-8 py-3 font-medium text-white hover:bg-blue-700 transition-all duration-300">
               Get a Freight Quote
-              {/* Arrow */}
-              <motion.span
-                className="inline-block"
-                whileHover={{ x: 6 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                →
-              </motion.span>
+              <motion.span whileHover={{ x: 6 }}>→</motion.span>
             </span>
-
-            {/* 🔥 Top Shine Effect */}
-            <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40"></span>
           </MotionLink>
         </motion.div>
       </div>

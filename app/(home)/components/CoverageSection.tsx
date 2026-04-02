@@ -7,6 +7,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import truck from "@/app/assets/truck.png";
 
 const cities = [
+  "Fresno, CA",
   "Little Rock, AR",
   "Cleveland, OH",
   "Tulsa, OK",
@@ -17,6 +18,13 @@ const cities = [
   "Kansas City, MO",
   "Pittsburgh, PA",
 ];
+
+const getDisplayCities = (isDesktop: boolean) => {
+  if (isDesktop) {
+    return cities.slice(0, 9); // Remove last city (Pittsburgh, PA) for desktop
+  }
+  return cities;
+};
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -128,7 +136,7 @@ const ctaVariant: Variants = {
 
 export function CoverageSection() {
   return (
-    <section className="relative overflow-hidden py-20 text-white">
+    <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 text-white">
       <motion.div
         className="absolute inset-0"
         initial={{ scale: 1.1 }}
@@ -152,7 +160,7 @@ export function CoverageSection() {
         />
       </motion.div>
 
-      <div className="relative mx-auto max-w-6xl px-4 text-center">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           variants={headingBlock}
           initial="hidden"
@@ -160,14 +168,14 @@ export function CoverageSection() {
           viewport={viewport}
         >
           <motion.p
-            className="text-sm font-medium text-blue-400"
+            className="text-xs sm:text-sm font-medium text-blue-400"
             variants={labelVariant}
           >
             Service Coverage
           </motion.p>
 
           <motion.h2
-            className="mt-2 text-3xl font-semibold leading-snug md:text-4xl"
+            className="mt-2 text-2xl sm:text-3xl md:text-4xl font-semibold leading-snug"
             variants={titleGroup}
           >
             <motion.span className="block" variants={titleLineLeft}>
@@ -179,7 +187,7 @@ export function CoverageSection() {
           </motion.h2>
 
           <motion.p
-            className="mx-auto mt-4 max-w-2xl text-sm text-gray-300"
+            className="mx-auto mt-3 sm:mt-4 max-w-2xl text-xs sm:text-sm text-gray-300 px-2"
             variants={subcopyVariant}
           >
             Serving the most popular freight lanes across the country with
@@ -187,28 +195,64 @@ export function CoverageSection() {
           </motion.p>
         </motion.div>
 
+        {/* Desktop Grid (3x3 = 9 cities) */}
         <motion.div
-          className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3"
+          className="hidden lg:grid mt-8 sm:mt-10 grid-cols-3 gap-3 sm:gap-4 px-2 sm:px-0"
           variants={gridContainer}
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
         >
-          {cities.map((city) => (
+          {getDisplayCities(true).map((city) => (
             <motion.div
               key={city}
-              className="flex h-[48px] w-full items-center justify-center gap-2 rounded-lg bg-white px-3 py-2 text-center text-xs font-medium text-blue-600 shadow md:text-sm"
+              className="flex h-[44px] sm:h-[48px] w-full items-center justify-center gap-2 rounded-lg bg-white px-2 sm:px-3 py-2 text-center text-xs sm:text-sm font-medium text-blue-600 shadow-md hover:shadow-lg transition-shadow"
               variants={chipOuter}
-              whileHover={{ scale: 1.05, y: -2 }}
+              whileHover={{ scale: 1.03, y: -2 }}
               transition={{ type: "spring", stiffness: 400, damping: 22 }}
             >
               <motion.span
-                className="inline-flex shrink-0 text-blue-600"
+                className="inline-flex shrink-0 text-blue-600 text-xs sm:text-sm"
                 variants={chipIcon}
               >
                 <FaMapMarkerAlt aria-hidden className="shrink-0" />
               </motion.span>
-              <motion.span className="leading-tight" variants={chipLabel}>
+              <motion.span
+                className="leading-tight truncate"
+                variants={chipLabel}
+              >
+                {city}
+              </motion.span>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Tablet & Mobile Grid (2 columns on tablet, 1 column on mobile) */}
+        <motion.div
+          className="grid lg:hidden mt-8 sm:mt-10 grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 px-2 sm:px-0"
+          variants={gridContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+        >
+          {getDisplayCities(false).map((city) => (
+            <motion.div
+              key={city}
+              className="flex h-[44px] sm:h-[48px] w-full items-center justify-center gap-2 rounded-lg bg-white px-2 sm:px-3 py-2 text-center text-xs sm:text-sm font-medium text-blue-600 shadow-md hover:shadow-lg transition-shadow"
+              variants={chipOuter}
+              whileHover={{ scale: 1.03, y: -2 }}
+              transition={{ type: "spring", stiffness: 400, damping: 22 }}
+            >
+              <motion.span
+                className="inline-flex shrink-0 text-blue-600 text-xs sm:text-sm"
+                variants={chipIcon}
+              >
+                <FaMapMarkerAlt aria-hidden className="shrink-0" />
+              </motion.span>
+              <motion.span
+                className="leading-tight truncate"
+                variants={chipLabel}
+              >
                 {city}
               </motion.span>
             </motion.div>
@@ -220,13 +264,13 @@ export function CoverageSection() {
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          className="mt-8 flex justify-center"
+          className="mt-6 sm:mt-8 md:mt-10 flex justify-center px-4"
         >
-          <motion.div className="flex justify-center lg:justify-start">
+          <motion.div className="flex justify-center w-full sm:w-auto">
             <motion.div
-              whileHover={{ scale: 1.08, y: -2 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="relative inline-block rounded-full p-[2px] overflow-hidden"
+              className="relative inline-block rounded-full p-[2px] overflow-hidden w-full sm:w-auto"
             >
               {/* 🔥 Animated Border */}
               <span
@@ -243,13 +287,13 @@ export function CoverageSection() {
               {/* 🔥 Button Content */}
               <Link
                 href="/contact"
-                className="relative z-10 flex items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-blue-700
-      shadow-[0_10px_25px_rgba(0,0,0,0.4),0_0_20px_rgba(255,0,0,0.4)]"
+                className="relative z-10 flex items-center justify-center gap-2 rounded-full bg-blue-600 px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-white transition-all duration-300 hover:bg-blue-700 shadow-[0_10px_25px_rgba(0,0,0,0.4),0_0_20px_rgba(255,0,0,0.4)] w-full sm:w-auto whitespace-nowrap"
               >
                 Get a Quote for Your Route
                 <motion.span
                   whileHover={{ x: 6 }}
                   transition={{ type: "spring", stiffness: 300 }}
+                  className="inline-block"
                 >
                   →
                 </motion.span>
