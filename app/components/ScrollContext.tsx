@@ -14,10 +14,12 @@ export function ScrollProvider({ children }: { children: React.ReactNode }) {
 
   const value = useMemo<ScrollContextValue>(
     () => ({ scrolled, setScrolled }),
-    [scrolled]
+    [scrolled],
   );
 
-  return <ScrollContext.Provider value={value}>{children}</ScrollContext.Provider>;
+  return (
+    <ScrollContext.Provider value={value}>{children}</ScrollContext.Provider>
+  );
 }
 
 export function useScrollState() {
@@ -27,4 +29,3 @@ export function useScrollState() {
   }
   return ctx;
 }
-
