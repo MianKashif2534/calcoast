@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import logo from "../assets/logo.png";
 
@@ -13,13 +13,10 @@ export default function VideoLoader() {
   const [progress, setProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    // ✅ check first load
+  // Before first paint on the client: show loader on first visit only (no dynamic import delay).
+  useLayoutEffect(() => {
     const hasLoaded = sessionStorage.getItem("hasLoaded");
-
-    if (hasLoaded) {
-      return; //
-    }
+    if (hasLoaded) return;
 
     sessionStorage.setItem("hasLoaded", "true");
     setVisible(true);
