@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
@@ -9,10 +8,8 @@ import mainImage from "@/app/assets/frame779.png";
 import overlayImage from "@/app/assets/frame781.png";
 import mobileImage from "@/app/assets/frame782.png";
 
-const MotionLink = motion.create(Link);
-
 export default function HomeAboutSection() {
-  const router = useRouter(); // ✅ use router
+  const router = useRouter();
 
   const fadeUp = {
     hidden: { opacity: 0, y: 50 },
@@ -22,7 +19,7 @@ export default function HomeAboutSection() {
   return (
     <section className="py-10">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="grid lg:grid-cols-2 gap-10 items-center rounded-3xl bg-white/90 backdrop-blur-md ring-1 ring-black/5 p-6 lg:p-10">
+        <div className="grid lg:grid-cols-2 gap-10 items-center rounded-3xl bg-white backdrop-blur-md ring-1 ring-black/10 p-6 lg:p-10">
           {/* Images */}
           <motion.div
             initial="hidden"
@@ -45,7 +42,7 @@ export default function HomeAboutSection() {
                 <Image
                   src={mobileImage}
                   alt="Truck"
-                  className="w-full rounded-xl border-4 transition duration-700 hover:scale-105"
+                  className="w-full rounded-xl  shadow-[0_0_20px_rgba(37,99,235,0.5)] transition duration-700 hover:scale-105"
                 />
               </motion.div>
 
@@ -62,13 +59,14 @@ export default function HomeAboutSection() {
                 <Image
                   src={mainImage}
                   alt="Fleet"
-                  className="w-full rounded-xl transition duration-700 hover:scale-105"
+                  className="w-full rounded-xl   shadow-[0_0_25px_rgba(37,99,235,0.6)] transition duration-700 hover:scale-105"
                 />
               </motion.div>
             </div>
 
             {/* Desktop */}
             <div className="hidden lg:block relative">
+              {/* Main Image */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -84,6 +82,7 @@ export default function HomeAboutSection() {
                 />
               </motion.div>
 
+              {/* Overlay Image */}
               <motion.div
                 initial={{ opacity: 0, x: 80, y: 40 }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -100,7 +99,7 @@ export default function HomeAboutSection() {
                     alt="Truck"
                     width={640}
                     height={483}
-                    className="rounded-xl shadow-xl border-[6px]"
+                    className="rounded-xl border-[5px] shadow-xl"
                   />
                 </motion.div>
               </motion.div>
@@ -117,7 +116,7 @@ export default function HomeAboutSection() {
           >
             <motion.p
               variants={fadeUp}
-              className="text-about-cal text-2xl font-semibold"
+              className="text-blue-600 text-2xl font-semibold"
             >
               About Cal Coast Logistics
             </motion.p>
@@ -127,12 +126,12 @@ export default function HomeAboutSection() {
               className="text-4xl font-bold leading-tight"
             >
               Fresno's Trusted <br />
-              <span className="text-freight">Freight Partner</span>
+              <span className="text-blue-600">Freight Partner</span>
             </motion.h2>
 
             <motion.p
               variants={fadeUp}
-              className="text-text-about text-lg leading-relaxed"
+              className="text-gray-600 text-lg leading-relaxed"
             >
               Cal Coast Logistics is an active interstate freight carrier based
               out of Fresno, California. We specialize in general freight, fresh
@@ -140,7 +139,7 @@ export default function HomeAboutSection() {
               of reliability and on time performance.
             </motion.p>
 
-            {/* Animated Button with navigation */}
+            {/* Button */}
             <motion.div
               variants={fadeUp}
               className="flex justify-center lg:justify-start"
@@ -151,34 +150,22 @@ export default function HomeAboutSection() {
                 whileTap={{ scale: 0.95 }}
                 className="relative inline-block rounded-full p-[2px] overflow-hidden w-full lg:w-auto"
               >
-                {/* 🔥 Animated Border */}
                 <span
                   className="absolute inset-0 rounded-full animate-[spin_3s_linear_infinite] blur-[6px] opacity-80"
                   style={{
                     background:
                       "conic-gradient(from 0deg, #ff0000, #ffff00, #ff0000)",
                   }}
-                ></span>
+                />
 
-                {/* 🔥 Inner Glass Layer */}
-                <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md"></span>
+                <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md" />
 
-                {/* 🔥 Button Content */}
-                <span
-                  className="relative z-10 flex items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-white font-medium transition-all duration-300 hover:bg-blue-700
-    shadow-[0_10px_25px_rgba(0,0,0,0.4),0_0_20px_rgba(255,0,0,0.4)]"
-                >
+                <span className="relative z-10 flex items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-white font-medium hover:bg-blue-700 transition">
                   Explore Our Services
-                  <motion.span
-                    whileHover={{ x: 6 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    →
-                  </motion.span>
+                  <motion.span whileHover={{ x: 6 }}>→</motion.span>
                 </span>
 
-                {/* 🔥 Shine Effect */}
-                <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40"></span>
+                <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40" />
               </motion.button>
             </motion.div>
           </motion.div>

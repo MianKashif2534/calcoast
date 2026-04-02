@@ -15,8 +15,7 @@ export function ReviewsSection() {
         headline: "Verified Reviews",
         title: "What Brokers Say",
         topTags: ["10/10 Timeliness", "10/10 Equipment", "10/10 Communication"],
-        quote:
-          `"Only ran a few loads for us in Nov '23, but they were great. Dedicated to the loads, awesome communication! We look forward to working with them in the future!!"`,
+        quote: `"Only ran a few loads for us in Nov '23, but they were great. Dedicated to the loads, awesome communication! We look forward to working with them in the future!!"`,
         smallTags: [
           "On Time Pickup",
           "On Time Delivery",
@@ -33,9 +32,14 @@ export function ReviewsSection() {
         headline: "Verified Reviews",
         title: "What Brokers Say",
         topTags: ["Perfect Service", "Fast Updates", "No Surprises"],
-        quote:
-          `"Great carrier. On time pickup and delivery, clean paperwork, and quick updates throughout the trip. Would absolutely book again."`,
-        smallTags: ["On Time Delivery", "Clear Communication", "Clean POD", "Proactive Updates", "Reliable ETA"],
+        quote: `"Great carrier. On time pickup and delivery, clean paperwork, and quick updates throughout the trip. Would absolutely book again."`,
+        smallTags: [
+          "On Time Delivery",
+          "Clear Communication",
+          "Clean POD",
+          "Proactive Updates",
+          "Reliable ETA",
+        ],
         authorTitle: "Verified Broker",
         authorMeta: "California · January 2024",
       },
@@ -45,9 +49,14 @@ export function ReviewsSection() {
         headline: "Verified Reviews",
         title: "What Brokers Say",
         topTags: ["9/10 Reliability", "Great Drivers", "Strong Dispatch"],
-        quote:
-          `"Driver was professional and easy to work with. Dispatch responded fast and kept us in the loop. Minor delay on pickup but delivery was still on time."`,
-        smallTags: ["Professional Driver", "Consistent Tracking", "Responsive Dispatch", "On Time Delivery", "Good Communication"],
+        quote: `"Driver was professional and easy to work with. Dispatch responded fast and kept us in the loop. Minor delay on pickup but delivery was still on time."`,
+        smallTags: [
+          "Professional Driver",
+          "Consistent Tracking",
+          "Responsive Dispatch",
+          "On Time Delivery",
+          "Good Communication",
+        ],
         authorTitle: "Verified Broker",
         authorMeta: "Texas · March 2024",
       },
@@ -57,9 +66,14 @@ export function ReviewsSection() {
         headline: "Verified Reviews",
         title: "What Brokers Say",
         topTags: ["Safe Equipment", "Road Ready", "Great Communication"],
-        quote:
-          `"Equipment was in excellent condition and the team communicated clearly from start to finish. Smooth process and solid execution."`,
-        smallTags: ["Well Maintained Equipment", "On Time Delivery", "Clear Updates", "Easy Scheduling", "Great Service"],
+        quote: `"Equipment was in excellent condition and the team communicated clearly from start to finish. Smooth process and solid execution."`,
+        smallTags: [
+          "Well Maintained Equipment",
+          "On Time Delivery",
+          "Clear Updates",
+          "Easy Scheduling",
+          "Great Service",
+        ],
         authorTitle: "Verified Broker",
         authorMeta: "Nevada · December 2023",
       },
@@ -69,9 +83,14 @@ export function ReviewsSection() {
         headline: "Verified Reviews",
         title: "What Brokers Say",
         topTags: ["Quick Turnaround", "Great Tracking", "On Time"],
-        quote:
-          `"Booked last minute and they still delivered on time. Tracking was consistent and communication was excellent. Highly recommend."`,
-        smallTags: ["Last Minute Coverage", "Consistent Tracking", "On Time Pickup", "On Time Delivery", "Fast Response"],
+        quote: `"Booked last minute and they still delivered on time. Tracking was consistent and communication was excellent. Highly recommend."`,
+        smallTags: [
+          "Last Minute Coverage",
+          "Consistent Tracking",
+          "On Time Pickup",
+          "On Time Delivery",
+          "Fast Response",
+        ],
         authorTitle: "Verified Broker",
         authorMeta: "Arizona · November 2023",
       },
@@ -81,14 +100,19 @@ export function ReviewsSection() {
         headline: "Verified Reviews",
         title: "What Brokers Say",
         topTags: ["Reliable Carrier", "Trusted Partner", "Solid Service"],
-        quote:
-          `"They treat freight like it's their own. Great communication and dependable execution. Paperwork took a bit longer than expected but overall a strong partner."`,
-        smallTags: ["Trusted Carrier", "Strong Communication", "Professional Team", "Reliable Service", "Good Experience"],
+        quote: `"They treat freight like it's their own. Great communication and dependable execution. Paperwork took a bit longer than expected but overall a strong partner."`,
+        smallTags: [
+          "Trusted Carrier",
+          "Strong Communication",
+          "Professional Team",
+          "Reliable Service",
+          "Good Experience",
+        ],
         authorTitle: "Verified Broker",
         authorMeta: "Washington · April 2024",
       },
     ],
-    []
+    [],
   );
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -151,7 +175,7 @@ export function ReviewsSection() {
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="relative h-[250px] overflow-hidden rounded-2xl md:h-[320px] group"
+              className="relative border-3 border-blue-500 h-[250px] overflow-hidden rounded-2xl md:h-[320px] group"
             >
               <Image
                 src={reviewImg}
@@ -199,7 +223,7 @@ export function ReviewsSection() {
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="rounded-2xl bg-[#0C0E74] p-6 text-white shadow-lg"
+              className="rounded-2xl border-3 border-blue-500 bg-[#0C0E74] p-6 text-white shadow-lg"
             >
               <motion.div
                 variants={container}
@@ -218,7 +242,7 @@ export function ReviewsSection() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, ease: "easeOut" }}
-                className="mb-5 text-[15px] leading-relaxed text-white/90"
+                className="mb-5  text-[15px] leading-relaxed text-white/90"
               >
                 {active.quote}
               </motion.p>
@@ -230,7 +254,11 @@ export function ReviewsSection() {
                 className="mb-5 flex flex-wrap gap-2"
               >
                 {active.smallTags.map((tag) => (
-                  <motion.span key={tag} variants={fadeUp} className="small-tag">
+                  <motion.span
+                    key={tag}
+                    variants={fadeUp}
+                    className="small-tag"
+                  >
                     {tag}
                   </motion.span>
                 ))}
@@ -249,7 +277,9 @@ export function ReviewsSection() {
 
                 <div className="flex items-center gap-1 text-yellow-400">
                   <FaStar />
-                  <span className="font-medium text-white">{active.rating.toFixed(1)}</span>
+                  <span className="font-medium text-white">
+                    {active.rating.toFixed(1)}
+                  </span>
                 </div>
               </motion.div>
             </motion.div>
@@ -260,7 +290,9 @@ export function ReviewsSection() {
               type="button"
               aria-label="Previous review"
               onClick={() =>
-                setActiveIndex((prev) => (prev - 1 + reviews.length) % reviews.length)
+                setActiveIndex(
+                  (prev) => (prev - 1 + reviews.length) % reviews.length,
+                )
               }
               className="rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-medium text-blue-700 shadow-sm transition hover:bg-blue-50"
             >
@@ -274,7 +306,9 @@ export function ReviewsSection() {
                   aria-label={`Go to review ${i + 1}`}
                   onClick={() => setActiveIndex(i)}
                   className={`h-2.5 w-2.5 rounded-full transition ${
-                    i === activeIndex ? "bg-blue-600" : "bg-blue-200 hover:bg-blue-300"
+                    i === activeIndex
+                      ? "bg-blue-600"
+                      : "bg-blue-200 hover:bg-blue-300"
                   }`}
                 />
               ))}
@@ -282,7 +316,9 @@ export function ReviewsSection() {
             <button
               type="button"
               aria-label="Next review"
-              onClick={() => setActiveIndex((prev) => (prev + 1) % reviews.length)}
+              onClick={() =>
+                setActiveIndex((prev) => (prev + 1) % reviews.length)
+              }
               className="rounded-full border border-blue-200 bg-white px-4 py-2 text-sm font-medium text-blue-700 shadow-sm transition hover:bg-blue-50"
             >
               Next
