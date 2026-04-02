@@ -39,7 +39,7 @@ export function ServicesSection() {
 
         {/* Cards */}
         <div className="mt-10 space-y-6">
-          {/* Card 1 */}
+          {/* CARD 1 */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -80,16 +80,39 @@ export function ServicesSection() {
                 <li>✓ Flexible scheduling to meet your deadlines</li>
               </ul>
 
-              <Link
-                href="/contact"
-                className="mt-5 inline-flex w-fit rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium transition hover:bg-blue-700"
-              >
-                Get a Quote →
-              </Link>
+              {/* 🔥 BUTTON UPDATED */}
+              <motion.div className="mt-5">
+                <motion.div
+                  whileHover={{ scale: 1.08, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative inline-block rounded-full p-[2px] overflow-hidden"
+                >
+                  <span
+                    className="absolute inset-0 rounded-full animate-[spin_3s_linear_infinite] blur-[6px] opacity-80"
+                    style={{
+                      background:
+                        "conic-gradient(from 0deg, #ff0000, #ffff00, #ff0000)",
+                    }}
+                  />
+
+                  <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md" />
+
+                  <Link
+                    href="/contact"
+                    className="relative z-10 flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-700
+                    shadow-[0_10px_25px_rgba(0,0,0,0.4),0_0_20px_rgba(255,0,0,0.4)]"
+                  >
+                    Get a Quote
+                    <motion.span whileHover={{ x: 6 }}>→</motion.span>
+                  </Link>
+
+                  <span className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40" />
+                </motion.div>
+              </motion.div>
             </motion.div>
           </motion.div>
 
-          {/* Card 2 */}
+          {/* CARD 2 */}
           <motion.div
             initial={{ opacity: 0, x: -80 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -103,13 +126,7 @@ export function ServicesSection() {
               className="h-[380px] w-full object-cover transition duration-700 group-hover:scale-105"
             />
 
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              variants={fadeUp}
-              transition={{ delay: 0.2 }}
-              className="bg-[#2D1B69] p-6 md:p-8 text-white flex flex-col justify-center"
-            >
+            <motion.div className="bg-[#2D1B69] p-6 md:p-8 text-white flex flex-col justify-center">
               <span className="mb-3 w-fit rounded-full bg-white/20 px-3 py-1 text-xs">
                 Main Focus
               </span>
@@ -118,8 +135,7 @@ export function ServicesSection() {
 
               <p className="mt-3 text-sm text-white/80">
                 Specialized handling for agricultural products with careful
-                transport from California's Central Valley. We understand the
-                time sensitive nature of fresh produce shipping.
+                transport from California's Central Valley.
               </p>
 
               <ul className="mt-4 space-y-2 text-sm">
@@ -129,16 +145,39 @@ export function ServicesSection() {
                 <li>✓ Compliance with food safety standards</li>
               </ul>
 
-              <Link
-                href="/contact"
-                className="mt-5 inline-flex w-fit rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium transition hover:bg-blue-700"
-              >
-                Get a Quote →
-              </Link>
+              {/* 🔥 BUTTON UPDATED */}
+              <motion.div className="mt-5">
+                <motion.div
+                  whileHover={{ scale: 1.08, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative inline-block rounded-full p-[2px] overflow-hidden"
+                >
+                  <span
+                    className="absolute inset-0 rounded-full animate-[spin_3s_linear_infinite] blur-[6px] opacity-80"
+                    style={{
+                      background:
+                        "conic-gradient(from 0deg, #ff0000, #ffff00, #ff0000)",
+                    }}
+                  />
+
+                  <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md" />
+
+                  <Link
+                    href="/contact"
+                    className="relative z-10 flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-700
+                    shadow-[0_10px_25px_rgba(0,0,0,0.4),0_0_20px_rgba(255,0,0,0.4)]"
+                  >
+                    Get a Quote
+                    <motion.span whileHover={{ x: 6 }}>→</motion.span>
+                  </Link>
+
+                  <span className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40" />
+                </motion.div>
+              </motion.div>
             </motion.div>
           </motion.div>
 
-          {/* Card 3 */}
+          {/* CARD 3 */}
           <motion.div
             initial={{ opacity: 0, x: 80 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -146,13 +185,7 @@ export function ServicesSection() {
             viewport={{ once: true }}
             className="grid md:grid-cols-2 overflow-hidden rounded-2xl shadow-lg group"
           >
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              variants={fadeUp}
-              transition={{ delay: 0.2 }}
-              className="bg-[#2D1B69] p-6 md:p-8 text-white flex flex-col justify-center"
-            >
+            <motion.div className="bg-[#2D1B69] p-6 md:p-8 text-white flex flex-col justify-center">
               <span className="mb-3 w-fit rounded-full bg-white/20 px-3 py-1 text-xs">
                 FTL Service
               </span>
@@ -161,23 +194,45 @@ export function ServicesSection() {
 
               <p className="mt-3 text-sm text-white/80">
                 Dedicated truck capacity for large shipments, maximizing
-                efficiency with direct point to point delivery. No sharing, no
-                stops your freight gets priority attention.
+                efficiency with direct point to point delivery.
               </p>
 
               <ul className="mt-4 space-y-2 text-sm">
                 <li>✓ Dedicated capacity for your load</li>
                 <li>✓ No stops or freight mixing</li>
-                <li>✓Fastest transit times available</li>
+                <li>✓ Fastest transit times available</li>
                 <li>✓ Ideal for high volume shipments</li>
               </ul>
 
-              <Link
-                href="/contact"
-                className="mt-5 inline-flex w-fit rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium transition hover:bg-blue-700"
-              >
-                Get a Quote →
-              </Link>
+              {/* 🔥 BUTTON UPDATED */}
+              <motion.div className="mt-5">
+                <motion.div
+                  whileHover={{ scale: 1.08, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative inline-block rounded-full p-[2px] overflow-hidden"
+                >
+                  <span
+                    className="absolute inset-0 rounded-full animate-[spin_3s_linear_infinite] blur-[6px] opacity-80"
+                    style={{
+                      background:
+                        "conic-gradient(from 0deg, #ff0000, #ffff00, #ff0000)",
+                    }}
+                  />
+
+                  <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md" />
+
+                  <Link
+                    href="/contact"
+                    className="relative z-10 flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-700
+                    shadow-[0_10px_25px_rgba(0,0,0,0.4),0_0_20px_rgba(255,0,0,0.4)]"
+                  >
+                    Get a Quote
+                    <motion.span whileHover={{ x: 6 }}>→</motion.span>
+                  </Link>
+
+                  <span className="absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40" />
+                </motion.div>
+              </motion.div>
             </motion.div>
 
             <Image

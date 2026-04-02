@@ -136,7 +136,13 @@ export function CoverageSection() {
         viewport={{ once: true }}
         transition={{ duration: 1.15, ease: easeOut }}
       >
-        <Image src={truck} alt="Cal Coast freight truck" fill priority className="object-cover" />
+        <Image
+          src={truck}
+          alt="Cal Coast freight truck"
+          fill
+          priority
+          className="object-cover"
+        />
         <motion.div
           className="absolute inset-0 bg-black/70"
           initial={{ opacity: 0 }}
@@ -176,8 +182,8 @@ export function CoverageSection() {
             className="mx-auto mt-4 max-w-2xl text-sm text-gray-300"
             variants={subcopyVariant}
           >
-            Serving the most popular freight lanes across the country with reliable, on time
-            delivery.
+            Serving the most popular freight lanes across the country with
+            reliable, on time delivery.
           </motion.p>
         </motion.div>
 
@@ -196,7 +202,10 @@ export function CoverageSection() {
               whileHover={{ scale: 1.05, y: -2 }}
               transition={{ type: "spring", stiffness: 400, damping: 22 }}
             >
-              <motion.span className="inline-flex shrink-0 text-blue-600" variants={chipIcon}>
+              <motion.span
+                className="inline-flex shrink-0 text-blue-600"
+                variants={chipIcon}
+              >
                 <FaMapMarkerAlt aria-hidden className="shrink-0" />
               </motion.span>
               <motion.span className="leading-tight" variants={chipLabel}>
@@ -213,13 +222,42 @@ export function CoverageSection() {
           viewport={viewport}
           className="mt-8 flex justify-center"
         >
-          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}>
-            <Link
-              href="/contact"
-              className="inline-block rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+          <motion.div className="flex justify-center lg:justify-start">
+            <motion.div
+              whileHover={{ scale: 1.08, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative inline-block rounded-full p-[2px] overflow-hidden"
             >
-              Get a Quote for Your Route →
-            </Link>
+              {/* 🔥 Animated Border */}
+              <span
+                className="absolute inset-0 rounded-full animate-[spin_3s_linear_infinite] blur-[6px] opacity-80"
+                style={{
+                  background:
+                    "conic-gradient(from 0deg, #ff0000, #ffff00, #ff0000)",
+                }}
+              ></span>
+
+              {/* 🔥 Inner Glass Layer */}
+              <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md"></span>
+
+              {/* 🔥 Button Content */}
+              <Link
+                href="/contact"
+                className="relative z-10 flex items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-blue-700
+      shadow-[0_10px_25px_rgba(0,0,0,0.4),0_0_20px_rgba(255,0,0,0.4)]"
+              >
+                Get a Quote for Your Route
+                <motion.span
+                  whileHover={{ x: 6 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  →
+                </motion.span>
+              </Link>
+
+              {/* 🔥 Shine Effect */}
+              <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40"></span>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
