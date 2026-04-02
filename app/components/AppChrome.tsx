@@ -2,15 +2,12 @@
 
 import dynamic from "next/dynamic";
 
-const Preloader = dynamic(
-  () => import("./Preloader").then((m) => m.Preloader),
-  { ssr: false }
-);
+const VideoLoader = dynamic(() => import("./VideoLoader"), { ssr: false });
 
 export function AppChrome({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Preloader />
+      <VideoLoader /> {/* 👈 replace ho gaya */}
       {children}
     </>
   );
