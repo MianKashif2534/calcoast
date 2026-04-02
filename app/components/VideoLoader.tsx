@@ -13,7 +13,6 @@ export default function VideoLoader() {
   const [progress, setProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Before first paint on the client: show loader on first visit only (no dynamic import delay).
   useLayoutEffect(() => {
     const hasLoaded = sessionStorage.getItem("hasLoaded");
     if (hasLoaded) return;
@@ -21,6 +20,11 @@ export default function VideoLoader() {
     sessionStorage.setItem("hasLoaded", "true");
     setVisible(true);
   }, []);
+
+  useLayoutEffect(() => {
+    if (!visible) return;
+    document.documentElement.classList.remove("cc-video-loader-pending");
+  }, [visible]);
 
   useEffect(() => {
     if (!visible) return;
@@ -69,12 +73,11 @@ export default function VideoLoader() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[9999] bg-[#0B1C2F] overflow-hidden"
+          className="fixed inset-0 z-[999999] bg-[#0B1C2F] overflow-hidden"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {/* 🎥 Video */}
           <video
             ref={videoRef}
             className="absolute inset-0 w-full h-full object-cover"
@@ -84,10 +87,8 @@ export default function VideoLoader() {
             preload="auto"
           />
 
-          {/* 🌑 Overlay */}
           <div className="absolute inset-0 bg-[#0B1C2F]/50" />
 
-          {/* 🔝 Logo */}
           <div className="absolute top-2 right-8 z-20 w-28 h-28 md:w-36 md:h-36 lg:w-44 lg:h-44">
             <Image
               src={logo}
@@ -97,7 +98,6 @@ export default function VideoLoader() {
             />
           </div>
 
-          {/* 📊 Progress */}
           <div className="absolute bottom-0 left-0 w-full h-[4px] bg-white/20 z-20">
             <motion.div
               className="h-full bg-[#F97316]"

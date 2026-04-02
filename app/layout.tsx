@@ -17,7 +17,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={futuraHeavy.variable}>
+    <html lang="en" className={futuraHeavy.variable} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{if(!sessionStorage.getItem('hasLoaded'))document.documentElement.classList.add('cc-video-loader-pending')}catch(e){}})()",
+          }}
+        />
+      </head>
       <body
         className={`${futuraHeavy.className} flex min-h-screen flex-col bg-white antialiased`}
       >
