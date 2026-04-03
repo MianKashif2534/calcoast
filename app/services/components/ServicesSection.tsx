@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import img1 from "@/app/assets/frame749.png";
 import img2 from "@/app/assets/service-produce1.png";
-import img3 from "@/app/assets/service-produce2.png";
+import img3 from "@/app/assets/frame779.png";
 
 export function ServicesSection() {
   const fadeUp = {
