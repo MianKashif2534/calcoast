@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" className={futuraHeavy.variable} suppressHydrationWarning>
       <head>
@@ -26,13 +26,18 @@ export default function RootLayout({
           }}
         />
       </head>
+
       <body
-        className={`${futuraHeavy.className} flex min-h-screen flex-col bg-white antialiased`}
+        className={`${futuraHeavy.className} flex min-h-screen flex-col bg-white antialiased overflow-x-hidden`}
       >
         <ScrollProvider>
           <AppChrome>
             <Navbar />
-            <main className="flex-1">{children}</main>
+
+            <main className="flex-1 pt-[60px] md:pt-0 w-full overflow-x-hidden">
+              {children}
+            </main>
+
             <Footer />
           </AppChrome>
         </ScrollProvider>

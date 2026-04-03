@@ -13,7 +13,10 @@ const navLinks = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Why Us", href: "/why-us" },
-  { label: "Driver", href: "https://intelliapp.driverapponline.com/c/calcoastlogistics " },
+  {
+    label: "Driver",
+    href: "https://intelliapp.driverapponline.com/c/calcoastlogistics",
+  },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -39,7 +42,7 @@ export function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [setScrolled]);
 
   // 🔥 DESKTOP LINKS
   const renderNavLinks = (links: typeof navLinks) =>
@@ -64,7 +67,7 @@ export function Navbar() {
           {/* TEXT */}
           <span className="relative block h-5 overflow-hidden">
             <span
-              className={`block transition-all duration-300 ${
+              className={`block md:transition-all duration-300 ${
                 scrolled ? "text-[#0055FF]" : "text-white"
               } ${!isActive && "group-hover:-translate-y-5"}`}
             >
@@ -73,7 +76,7 @@ export function Navbar() {
 
             {!isActive && (
               <span
-                className={`absolute left-0 top-0 block translate-y-5 transition-all duration-300 ${
+                className={`absolute left-0 top-0 block translate-y-5 md:transition-all duration-300 ${
                   scrolled ? "text-[#0055FF]" : "text-white"
                 } group-hover:translate-y-0`}
               >
@@ -96,16 +99,16 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 z-[100] transition-all duration-500 ${
-        scrolled ? "top-0" : "top-6"
-      }`}
+      className={`fixed inset-x-0 z-[100] top-0 ${
+        scrolled ? "md:top-0" : "md:top-6"
+      } md:transition-all md:duration-500`}
     >
       <div
         className={`mx-auto w-full ${
           scrolled ? "max-w-full p-0" : "max-w-6xl px-4 py-3"
         }`}
       >
-        {/* DESKTOP */}
+        {/* DESKTOP NAV */}
         <nav
           className={`hidden md:flex items-center w-full ${
             scrolled ? "bg-white p-2 shadow-md" : "bg-[#0055FF] p-1 rounded-lg"
@@ -132,8 +135,8 @@ export function Navbar() {
           </div>
         </nav>
 
-        {/* MOBILE NAV */}
-        <div className="md:hidden bg-white shadow-sm px-4 py-2 fixed top-0 left-0 right-0 z-[100]">
+        {/* MOBILE NAVBAR (FIXED — NO MOVEMENT) */}
+        <div className="md:hidden fixed top-0 left-0 right-0 z-[100] bg-white shadow-sm px-4 py-2">
           <div className="flex items-center justify-between">
             <Image src={logo} alt="logo" height={40} width={140} />
 
@@ -146,11 +149,11 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* 🔥 MOBILE MENU */}
+        {/* MOBILE MENU */}
         <div
-          className={`fixed inset-0 z-[9999] md:hidden flex flex-col items-center justify-center gap-6 transition-all duration-500 ${
+          className={`fixed inset-0 z-[9999] md:hidden flex flex-col items-center justify-center gap-6 ${
             menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
+          } transition-opacity duration-300`}
           style={{ background: "#ffffff" }}
         >
           <button
@@ -173,16 +176,14 @@ export function Navbar() {
                 onTouchEnd={() => setActiveTouch(null)}
                 className="relative group px-6 py-3 rounded-full overflow-hidden transition-all duration-200 active:scale-95"
               >
-                {/* BG */}
                 <span
-                  className={`absolute inset-0 rounded-full transition duration-300 ${
+                  className={`absolute inset-0 rounded-full ${
                     isActive || isTouch
                       ? "bg-black/10"
                       : "bg-black/5 group-hover:bg-black/10"
                   }`}
                 ></span>
 
-                {/* TEXT */}
                 <span className="relative block h-7 overflow-hidden text-2xl font-bold text-black">
                   <span
                     className={`block transition-all duration-300 ${
@@ -203,7 +204,6 @@ export function Navbar() {
                   )}
                 </span>
 
-                {/* LINE */}
                 <span
                   className={`absolute top-0 left-0 w-full h-[2px] bg-black transition-transform duration-300 origin-left ${
                     isActive || isTouch
