@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 
-import leftImg from "@/app/assets/left.png";
-import rightImg from "@/app/assets/right.png";
+import leftImg from "@/app/assets/frame779.png";
+import rightImg from "@/app/assets/service-produce1.png";
 
 export function WhyUsFleetSection() {
   return (
