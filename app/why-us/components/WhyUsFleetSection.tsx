@@ -33,7 +33,6 @@ export function WhyUsFleetSection() {
             />
           </div>
 
-          {/* Text + Right Image */}
           <div className="order-1 flex flex-col gap-6 lg:order-2 text-center lg:text-left">
             {/* Text */}
             <div
@@ -58,7 +57,6 @@ export function WhyUsFleetSection() {
               </p>
             </div>
 
-            {/* Right Image */}
             <div
               className="relative overflow-hidden rounded-3xl"
               style={{
