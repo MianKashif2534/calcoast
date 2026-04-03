@@ -125,14 +125,136 @@ const inputClassName =
 const selectClassName =
   "w-full appearance-none rounded-lg border border-transparent bg-[linear-gradient(#ffffff,#ffffff)_padding-box,linear-gradient(90deg,rgba(52,116,244,0.55),rgba(90,168,255,0.55),rgba(52,116,244,0.55))_border-box] px-4 py-3 pr-10 text-[#1A1A1A] shadow-[0_0_0_1px_rgba(52,116,244,0.12),0_10px_22px_rgba(15,23,42,0.05)] transition-[box-shadow,transform] duration-200 outline-none shadow-[0_0_0_2px_rgba(52,116,244,0.25),0_0_28px_rgba(52,116,244,0.18),0_16px_28px_rgba(15,23,42,0.07)] [&>option]:text-[#1A1A1A] [&>option[value='']]:text-[#8A93A3]";
 
+function buildQuoteEmailBody(fields: {
+  fullName: string;
+  email: string;
+  phone: string;
+  freightType: string;
+  origin: string;
+  destination: string;
+  details: string;
+}): string {
+  const dash = (v: string) => (v.trim() ? v.trim() : "—");
+  return [
+    "══════════════════════════════════════",
+    "  NEW FREIGHT QUOTE REQUEST",
+    "══════════════════════════════════════",
+    "",
+    "CONTACT",
+    "───────",
+    `  Name:          ${dash(fields.fullName)}`,
+    `  Email:         ${dash(fields.email)}`,
+    `  Phone:         ${dash(fields.phone)}`,
+    "",
+    "SHIPMENT",
+    "────────",
+    `  Freight type:  ${dash(fields.freightType)}`,
+    `  Origin:        ${dash(fields.origin)}`,
+    `  Destination:   ${dash(fields.destination)}`,
+    "",
+    "ADDITIONAL DETAILS",
+    "──────────────────",
+    fields.details.trim() || "  (none provided)",
+    "",
+    "— Sent via website quote form",
+  ].join("\n");
+}
+
 export function QuoteFormSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">(
+    "idle",
+  );
+  const [submitMessage, setSubmitMessage] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim() || "2db2bd75-4e8c-457a-b9ae-20916e67e912";
+    if (!accessKey) {
+      setSubmitStatus("error");
+      setSubmitMessage(
+        "Form email is not configured. Add NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY to your environment.",
+      );
+      return;
+    }
+
+    const fd = new FormData(form);
+    const fullName = String(fd.get("fullName") ?? "").trim();
+    const email = String(fd.get("email") ?? "").trim();
+    const phone = String(fd.get("phone") ?? "").trim();
+    const freightType = String(fd.get("freightType") ?? "").trim();
+    const origin = String(fd.get("origin") ?? "").trim();
+    const destination = String(fd.get("destination") ?? "").trim();
+    const details = String(fd.get("details") ?? "").trim();
+
+    const route =
+      origin && destination
+        ? `${origin} → ${destination}`
+        : origin || destination || "Route TBD";
+    const subject = `Freight quote: ${route} — ${fullName || email || "Website"}`;
+
+    const formData = new FormData();
+    formData.append("access_key", accessKey);
+    formData.append("subject", subject);
+    formData.append("name", fullName);
+    formData.append("email", email);
+    formData.append("replyto", email);
+    if (phone) formData.append("phone", phone);
+    formData.append(
+      "message",
+      buildQuoteEmailBody({
+        fullName,
+        email,
+        phone,
+        freightType,
+        origin,
+        destination,
+        details,
+      }),
+    );
+
     setIsSubmitting(true);
-    await new Promise((r) => setTimeout(r, 800));
-    setIsSubmitting(false);
+    setSubmitStatus("idle");
+    setSubmitMessage("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      let data: { success?: boolean; message?: string };
+      try {
+        data = await response.json();
+      } catch {
+        setSubmitStatus("error");
+        setSubmitMessage(
+          "We could not read the server response. Please try again.",
+        );
+        return;
+      }
+
+      if (data.success) {
+        setSubmitStatus("success");
+        setSubmitMessage(
+          "Thanks — your quote request was sent. We will get back to you shortly.",
+        );
+        form.reset();
+      } else {
+        setSubmitStatus("error");
+        setSubmitMessage(
+          data.message?.trim() ||
+            "Something went wrong sending your request. Please try again or call us.",
+        );
+      }
+    } catch {
+      setSubmitStatus("error");
+      setSubmitMessage(
+        "Network error — please check your connection and try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -399,6 +521,23 @@ export function QuoteFormSection() {
                     <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40"></span>
                   </motion.div>
                 </motion.div>
+
+                {submitStatus !== "idle" && (
+                  <motion.p
+                    role="status"
+                    aria-live="polite"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, ease: easeOut }}
+                    className={
+                      submitStatus === "success"
+                        ? "rounded-xl border border-emerald-200/80 bg-emerald-50/90 px-4 py-3 text-center text-sm font-medium text-emerald-900"
+                        : "rounded-xl border border-red-200/80 bg-red-50/90 px-4 py-3 text-center text-sm font-medium text-red-900"
+                    }
+                  >
+                    {submitMessage}
+                  </motion.p>
+                )}
               </motion.form>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import { AboutPage } from "./components/AboutPage";
+import { AboutGallerySection } from "./components/AboutGallerySection";
 import HomeAboutSection from "@/app/(home)/components/HomeAboutSection";
 import { CoreValuesSection } from "./components/CoreValuesSection";
 import { CompanyTimeline } from "./components/CompanyTimeline";
@@ -9,6 +10,7 @@ export default function About() {
     <>
       <AboutPage />
       <HomeAboutSection />
+      <AboutGallerySection />
       <CoreValuesSection />
       <CompanyTimeline />
       <StatsSection />
