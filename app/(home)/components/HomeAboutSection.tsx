@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import mainImage from "@/app/assets/frame779.png";
 import overlayImage from "@/app/assets/frame781.png";
-import mobileImage from "@/app/assets/frame782.png";
+import mobile from "@/app/assets/frame782.png";
 
 export default function HomeAboutSection() {
   const router = useRouter();
@@ -38,11 +38,16 @@ export default function HomeAboutSection() {
                 </p>
               </motion.div>
 
-              <motion.div variants={fadeUp}>
+              {/* Mobile Image 1 */}
+              <motion.div
+                variants={fadeUp}
+                className="relative w-full h-[180px] sm:h-[220px]"
+              >
                 <Image
-                  src={mobileImage}
+                  src={mobile}
                   alt="Truck"
-                  className="w-full rounded-xl  shadow-[0_0_20px_rgba(37,99,235,0.5)] transition duration-700 hover:scale-105"
+                  fill
+                  className="object-cover rounded-xl shadow-[0_0_20px_rgba(37,99,235,0.5)] transition duration-700 hover:scale-105"
                 />
               </motion.div>
 
@@ -55,11 +60,16 @@ export default function HomeAboutSection() {
                 </p>
               </motion.div>
 
-              <motion.div variants={fadeUp}>
+              {/* Mobile Image 2 */}
+              <motion.div
+                variants={fadeUp}
+                className="relative w-full h-[180px] sm:h-[220px]"
+              >
                 <Image
                   src={mainImage}
                   alt="Fleet"
-                  className="w-full rounded-xl   shadow-[0_0_25px_rgba(37,99,235,0.6)] transition duration-700 hover:scale-105"
+                  fill
+                  className="object-cover rounded-xl shadow-[0_0_25px_rgba(37,99,235,0.6)] transition duration-700 hover:scale-105"
                 />
               </motion.div>
             </div>
@@ -150,6 +160,7 @@ export default function HomeAboutSection() {
                 whileTap={{ scale: 0.95 }}
                 className="relative inline-block rounded-full p-[2px] overflow-hidden w-full lg:w-auto"
               >
+                {/* Animated Border */}
                 <span
                   className="absolute inset-0 rounded-full animate-[spin_3s_linear_infinite] blur-[6px] opacity-80"
                   style={{
@@ -158,13 +169,16 @@ export default function HomeAboutSection() {
                   }}
                 />
 
+                {/* Inner Layer */}
                 <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md" />
 
+                {/* Content */}
                 <span className="relative z-10 flex items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-white font-medium hover:bg-blue-700 transition">
                   Explore Our Services
                   <motion.span whileHover={{ x: 6 }}>→</motion.span>
                 </span>
 
+                {/* Shine */}
                 <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-b from-white/20 to-transparent opacity-40" />
               </motion.button>
             </motion.div>
