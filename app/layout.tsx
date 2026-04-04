@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import "@/app/globals.css"; // Global CSS import
 import { AppChrome } from "@/app/components/AppChrome";
 import { Navbar } from "@/app/components/Navbar";
 import { Footer } from "@/app/components/Footer";
 import { futuraHeavy } from "@/app/font";
 import { ScrollProvider } from "./components/ScrollContext";
-import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Calcoast Logistics",
@@ -21,8 +21,12 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html:
-              "(function(){try{if(!sessionStorage.getItem('hasLoaded'))document.documentElement.classList.add('cc-video-loader-pending')}catch(e){}})()",
+            __html: `(function(){
+              try {
+                if(!sessionStorage.getItem('hasLoaded'))
+                  document.documentElement.classList.add('cc-video-loader-pending');
+              } catch(e){}
+            })()`,
           }}
         />
       </head>
