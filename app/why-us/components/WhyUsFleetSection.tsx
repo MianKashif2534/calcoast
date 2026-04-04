@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 
-import leftImg from "@/app/assets/left.png";
-import rightImg from "@/app/assets/right.png";
+import leftImg from "@/app/assets/frame779.png";
+import rightImg from "@/app/assets/service-produce1.png";
 
 export function WhyUsFleetSection() {
   return (
@@ -33,7 +33,6 @@ export function WhyUsFleetSection() {
             />
           </div>
 
-          {/* Text + Right Image */}
           <div className="order-1 flex flex-col gap-6 lg:order-2 text-center lg:text-left">
             {/* Text */}
             <div
@@ -58,7 +57,6 @@ export function WhyUsFleetSection() {
               </p>
             </div>
 
-            {/* Right Image */}
             <div
               className="relative overflow-hidden rounded-3xl"
               style={{
