@@ -27,7 +27,7 @@ const panelAlignClasses: Record<Position, string> = {
 };
 
 export function WhatsAppFloat({
-  phoneNumber = "+919916234567",
+  phoneNumber = "+1 (831) 998-4084",
   message = "Hello! I'm interested in Cal Coast Logistics services. Can you help me?",
   position = "bottom-right",
   pulseAnimation = true,
