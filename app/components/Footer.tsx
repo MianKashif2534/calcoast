@@ -339,6 +339,7 @@ export function Footer() {
                     alt="Cal Coast Logistics"
                     height={36}
                     width={160}
+                    priority
                     className="h-9 w-auto object-contain"
                   />
                 </div>
