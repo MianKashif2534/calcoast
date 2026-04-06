@@ -124,6 +124,7 @@ export function Navbar() {
               alt="logo"
               height={40}
               width={160}
+              priority
               style={{
                 filter: !scrolled ? "brightness(0) invert(1)" : "none",
               }}
