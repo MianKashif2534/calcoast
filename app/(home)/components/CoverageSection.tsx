@@ -196,7 +196,7 @@ export function CoverageSection() {
         </motion.div>
 
         {/* Desktop Grid (3x3 = 9 cities) */}
-        <motion.div
+        {/* <motion.div
           className="hidden lg:grid mt-8 sm:mt-10 grid-cols-3 gap-3 sm:gap-4 px-2 sm:px-0"
           variants={gridContainer}
           initial="hidden"
@@ -225,10 +225,10 @@ export function CoverageSection() {
               </motion.span>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
 
         {/* Tablet & Mobile Grid (2 columns on tablet, 1 column on mobile) */}
-        <motion.div
+        {/* <motion.div
           className="grid lg:hidden mt-8 sm:mt-10 grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 px-2 sm:px-0"
           variants={gridContainer}
           initial="hidden"
@@ -257,7 +257,7 @@ export function CoverageSection() {
               </motion.span>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
 
         <motion.div
           variants={ctaVariant}
