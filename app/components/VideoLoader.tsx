@@ -1,9 +1,62 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Image from "next/image";
 import logo from "../assets/logo.png";
+
+// Animated "Welcome to" with character-by-character spring effect
+const AnimatedWelcomeText = ({ className }: { className?: string }) => {
+  const text = "Welcome to";
+  const characters = text.split("");
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const characterVariants = {
+    hidden: { opacity: 0, y: 40, rotateX: -90, scale: 0.5 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      scale: 1,
+      transition: {
+        type: "spring" as const,
+        damping: 12,
+        stiffness: 200,
+        mass: 0.8,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      className={`flex flex-nowrap justify-center overflow-visible ${className}`}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {characters.map((char, index) => (
+        <motion.span
+          key={index}
+          variants={characterVariants}
+          style={{ display: "inline-block", whiteSpace: "pre" }}
+          className="text-white/90 font-bold tracking-wider uppercase"
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+};
 
 export default function VideoLoader() {
   const [visible, setVisible] = useState(false);
@@ -114,7 +167,6 @@ export default function VideoLoader() {
     return () => clearTimeout(timer);
   }, [visible, isMobile]);
 
-  // Background color extracted from the provided image
   const brandBgColor = "#0814a0";
 
   return (
@@ -122,9 +174,7 @@ export default function VideoLoader() {
       {visible && (
         <motion.div
           className="fixed inset-0 z-[999999] flex items-center justify-center"
-          style={{
-            background: brandBgColor,
-          }}
+          style={{ background: brandBgColor }}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
@@ -179,21 +229,14 @@ export default function VideoLoader() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="z-10 px-6"
+                className="z-10 px-4 w-full"
               >
-                {/* "Welcome to" - made larger than the logo */}
-                <motion.p
-                  className="text-white/90 text-5xl sm:text-6xl font-bold tracking-wider uppercase mb-4"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  Welcome to
-                </motion.p>
+                {/* "Welcome to" - animated, smaller font for mobile */}
+                <AnimatedWelcomeText className="text-4xl sm:text-3xl mb-4 justify-center w-full" />
 
                 {/* Logo */}
                 <motion.div
-                  className="relative w-48 h-20 mx-auto my-2"
+                  className="relative w-40 h-16 mx-auto my-2"
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
@@ -435,15 +478,8 @@ export default function VideoLoader() {
                   ON-TIME DELIVERY GUARANTEE
                 </motion.p>
 
-                {/* "Welcome to" - made larger than the logo */}
-                <motion.p
-                  className="text-white/90 text-3xl md:text-7xl font-bold tracking-wider uppercase mb-6"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  Welcome to
-                </motion.p>
+                {/* "Welcome to" - animated, larger for desktop */}
+                <AnimatedWelcomeText className="text-3xl md:text-7xl mb-6 justify-center" />
 
                 {/* Logo */}
                 <motion.div
