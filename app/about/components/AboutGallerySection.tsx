@@ -8,16 +8,10 @@ import { IoChevronBack, IoChevronForward, IoClose } from "react-icons/io5";
 import img1360 from "@/app/assets/IMG_1360.png";
 import img1370 from "@/app/assets/IMG_1370.png";
 import img1362 from "@/app/assets/IMG_1362.png";
-import img1368 from "@/app/assets/IMG_1368.png";
-import img1369 from "@/app/assets/IMG_1369.png";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
 const photos: { src: StaticImageData; alt: string }[] = [
-  {
-    src: img1368,
-    alt: "Team member supporting customers at Cal Coast Logistics",
-  },
   {
     src: img1360,
     alt: "Cal Coast Logistics team collaborating in a modern conference room",
@@ -29,11 +23,6 @@ const photos: { src: StaticImageData; alt: string }[] = [
   {
     src: img1362,
     alt: "Cal Coast Logistics office and dispatch environment",
-  },
- 
-  {
-    src: img1369,
-    alt: "Professional workstation at Cal Coast Logistics",
   },
 ];
 
@@ -104,7 +93,7 @@ export function AboutGallerySection() {
             hidden: {},
             show: { transition: { staggerChildren: 0.08 } },
           }}
-          className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 lg:gap-5"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 md:gap-5"
         >
           {photos.map((photo, index) => (
             <motion.li
@@ -118,33 +107,25 @@ export function AboutGallerySection() {
                 },
               }}
               className={
-                index === 0
-                  ? "sm:col-span-2 lg:col-span-2 lg:row-span-2"
+                index === photos.length - 1
+                  ? "sm:col-span-2 sm:flex sm:justify-center md:col-span-1 md:block"
                   : undefined
               }
             >
               <button
                 type="button"
                 onClick={() => setLightbox(index)}
-                className="group relative block w-full overflow-hidden rounded-2xl bg-black/5 text-left shadow-sm ring-1 ring-black/[0.06] transition hover:ring-nav-cta/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nav-cta"
+                className={`group relative block w-full overflow-hidden rounded-2xl bg-black/5 text-left shadow-sm ring-1 ring-black/[0.06] transition hover:ring-nav-cta/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nav-cta ${
+                  index === photos.length - 1 ? "sm:max-w-lg md:max-w-none" : ""
+                }`}
               >
-                <div
-                  className={
-                    index === 0
-                      ? "relative aspect-[16/10] sm:aspect-[21/9] lg:aspect-auto lg:min-h-[min(420px,55vw)] lg:max-h-[520px]"
-                      : "relative aspect-[4/3]"
-                  }
-                >
+                <div className="relative aspect-[4/3]">
                   <Image
                     src={photo.src}
                     alt={photo.alt}
                     fill
                     className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                    sizes={
-                      index === 0
-                        ? "(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 66vw"
-                        : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    }
+                    sizes="(max-width: 639px) 100vw, (max-width: 767px) 50vw, 33vw"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-80 transition group-hover:opacity-100" />
                   <span className="pointer-events-none absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-black/80 backdrop-blur-sm">
