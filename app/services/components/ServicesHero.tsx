@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import servicesBg from "@/app/assets/servicesBg.png";
+import heroBg from "@/app/assets/HeroBg.png";
 
 export function ServicesHero() {
   const container = {
@@ -34,7 +34,7 @@ export function ServicesHero() {
         className="absolute inset-0"
       >
         <Image
-          src={servicesBg}
+          src={heroBg}
           alt="Freight Services Background"
           fill
           priority
