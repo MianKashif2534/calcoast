@@ -3,6 +3,7 @@ import { Navbar } from "@/app/components/Navbar";
 import { Footer } from "@/app/components/Footer";
 import "./globals.css";
 import { ScrollProvider } from "@/app/components/ScrollContext";
+import { AppChrome } from "@/app/components/AppChrome";
 import { futuraHeavy } from "@/app/font";
 
 export const metadata: Metadata = {
@@ -21,9 +22,11 @@ export default function RootLayout({
         className={`${futuraHeavy.className} flex min-h-screen flex-col bg-white antialiased`}
       >
         <ScrollProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <AppChrome>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </AppChrome>
         </ScrollProvider>
       </body>
     </html>

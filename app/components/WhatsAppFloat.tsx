@@ -41,7 +41,7 @@ export function WhatsAppFloat({
   };
 
   return (
-    <div className={`fixed z-[100] ${positionClasses[position]}`}>
+    <div className={`fixed z-[110] ${positionClasses[position]}`}>
       <div className="relative h-14 w-14 shrink-0">
         <AnimatePresence>
           {isOpen && (
@@ -93,7 +93,7 @@ export function WhatsAppFloat({
         <motion.button
           type="button"
           onClick={() => setIsOpen((o) => !o)}
-          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-nav-cta text-white shadow-lg ring-2 ring-white/30 transition-shadow hover:bg-nav-cta-hover hover:ring-white/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-nav-cta"
+          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg ring-2 ring-white/40 transition-shadow hover:bg-[#20BD5A] hover:ring-white/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
           whileHover={{ scale: 1.06 }}
           whileTap={{ scale: 0.94 }}
           aria-expanded={isOpen}
@@ -101,7 +101,7 @@ export function WhatsAppFloat({
         >
           {pulseAnimation && !isOpen && (
             <span
-              className="absolute inset-0 rounded-full bg-nav-cta opacity-60 motion-safe:animate-ping"
+              className="absolute inset-0 rounded-full bg-[#25D366] opacity-60 motion-safe:animate-ping"
               aria-hidden
             />
           )}
