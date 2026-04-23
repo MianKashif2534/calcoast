@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 import logo from "../assets/logo.png";
-import { useScrollState } from "./ScrollContext";
+import { useScrollState } from "@/app/components/ScrollContext";
 
 const navLinks = [
   { label: "Home", href: "/" },

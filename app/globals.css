@@ -1,20 +1,6 @@
 @import "tailwindcss";
 
-html.cc-video-loader-pending {
-  overflow: hidden;
-}
-
-html.cc-video-loader-pending::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 999998;
-  background: #0b1c2f;
-  pointer-events: auto;
-}
-
 @theme {
-  --font-sans: var(--font-futura-heavy), ui-sans-serif, system-ui, sans-serif;
   --color-nav-primary: #0055FF;
   --color-nav-cta: #3474F4;
   --color-nav-cta-hover: #285ee0;
@@ -47,5 +33,3 @@ html.cc-video-loader-pending::before {
   }
 
 }
-
-

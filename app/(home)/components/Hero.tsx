@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import heroBg from "@/app/assets/Frame 820 (1).png";
 import heroRightImage from "@/app/assets/Three-DTL-Trucks 1.png";
-import { useScrollState } from "../../components/ScrollContext";
+import { useScrollState } from "@/app/components/ScrollContext";
 import mainImage from "@/app/assets/frame779.png";
 import overlayImage from "@/app/assets/frame781.png";
 import mobileImage from "@/app/assets/frame782.png";
